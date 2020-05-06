@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 	<title><?php echo $page_title ?></title>
 </head>
-<body>
+<body class="grey">
 
     <nav id="tiny_bar">
         <div id="align-left">
@@ -36,4 +36,3 @@
     <?php 
         require "menu_burger.php";
     ?>
-    <main>

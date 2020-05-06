@@ -37,4 +37,15 @@
     <?php 
         require "menu_burger.php";
     ?>
+
+	<div id="bande_icones">
+		<a href="./prestations.php"><div class="icon_container">
+			<img src="./assets/images/build.png" height="52px" width="52px">
+			<p>Gérer les prestations</p>
+		</div></a>
+		<a href="./clients.php"><div class="icon_container">
+			<img src="./assets/images/people.png" height="52px" width="76px">
+			<p>Gérer les clients</p>
+		</div></a>
+	</div>
     <main>
