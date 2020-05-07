@@ -8,45 +8,32 @@
 		
 
 		<div class="container_clients">
-
 			<h2 class="titre_client">Clients</h2>
 
-            <div class="client">
-				<h4 class="client_titre" id="">Mme Truc</h4>
-                    <div class="client_icons">
-				        <img src="./assets/images/edit.png" class="icon_edit" id="">
+            <?php
+            	require "php/functions.php";
 
-				        <a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
-                    </div> 
-            </div>
-            <hr class="client_separateur">
-            <div class="client">
-				<h4 class="client_titre" id="">Mme Truc</h4>
-                    <div class="client_icons">
-				        <img src="./assets/images/edit.png" class="icon_edit" id="">
+				$tabLigne = lireTable("clients");
 
-				        <a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
-                    </div> 
-            </div>
-            <hr class="client_separateur">
-            <div class="client">
-				<h4 class="client_titre" id="">Mme Truc</h4>
-                    <div class="client_icons">
-				        <img src="./assets/images/edit.png" class="icon_edit" id="">
+				foreach($tabLigne as $client) {
+					$prenom = $client["prenom"];
+					$nom = $client["nom"];
 
-				        <a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
-                    </div> 
-            </div>
-            <hr class="client_separateur">
-            <div class="client">
-				<h4 class="client_titre" id="">Mme Truc</h4>
-                    <div class="client_icons">
-				        <img src="./assets/images/edit.png" class="icon_edit" id="">
-
-				        <a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
-                    </div> 
-            </div>
-			<hr class="client_separateur">
+					echo
+					<<<CODEHTML
+						<div class="client">
+							<h4 class="client_titre" id="">$prenom $nom</h4>
+								<div class="client_icons">
+								<img src="./assets/images/edit.png" class="icon_edit" id="">
+								<a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
+								</div> 
+							</div>
+							<hr class="client_separateur">
+					CODEHTML;
+				}
+			
+			?>
+            
 		</div>
 		<!--fin de la liste des clients-->
 

@@ -51,86 +51,72 @@
    	</div>
 
    	<main id="visites_aside">
-        <div class=carte_visite>
-            <div class="card_header">
-                <div class="check_icons">
-                    <img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>
-                    <img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>
 
-                </div>
-                <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#"><img src="./assets/images/delete.png"></a>
-                </div>
-            </div>
+        <?php
+            require "php/functions.php";
 
-            <div class="carte_body card_body">
-                <h2>Chez Mme Truc</h2>
-                <p>Le 6/12/2019 à 14h30</p>
-                <p><span class="bold">Prestations : Prestation 1 | Prestation 2</span></p>
-                <h3>Prix total: 20 €</h3>
-            </div>
-        </div>
+            $tabLigne = lireTableVisites();
 
-        <div class=carte_visite>
-            <div class="card_header">
-                <div class="check_icons">
-                    <img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>
-                    <img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>
+            foreach($tabLigne as $visite) {
 
-                </div>
-                <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#"><img src="./assets/images/delete.png"></a>
-                </div>
-            </div>
+                $client_nom = $visite["client_nom"];
+                $client_prenom = $visite["client_prenom"];
+                $date = $visite["date"];
+                $heure = $visite["heure"];
+                $prix_total = $visite["prix_total"];
+                $payee = $visite["payee"];
+                $effectuee = $visite["effectuee"];
 
-            <div class="carte_body card_body">
-                <h2>Chez Mme Truc</h2>
-                <p>Le 6/12/2019 à 14h30</p>
-                <p><span class="bold">Prestations : Prestation 1 | Prestation 2</span></p>
-                <h3>Prix total: 20 €</h3>
-            </div>
-        </div>
+                echo
+                <<<CODEHTML
+                    <div class=carte_visite>
+                        <div class="card_header">
+                            <div class="check_icons">
+                 CODEHTML;
 
-        <div class=carte_visite>
-            <div class="card_header">
-                <div class="check_icons">
-                    <img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>
-                    <img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>
+                 if($effectuee == 1) {
+                    echo
+                    <<<CODEHTML
+                        <img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>
+                    CODEHTML;
+                 }
 
-                </div>
-                <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#"><img src="./assets/images/delete.png"></a>
-                </div>
-            </div>
+                 else {
+                    echo
+                    <<<CODEHTML
+                        <img src="./assets/images/uncheck.png" width="30px" height="30px"><p>En cours</p>
+                    CODEHTML;
+                 }
 
-            <div class="carte_body card_body">
-                <h2>Chez Mme Truc</h2>
-                <p>Le 6/12/2019 à 14h30</p>
-                <p><span class="bold">Prestations : Prestation 1 | Prestation 2</span></p>
-                <h3>Prix total: 20 €</h3>
-            </div>
-        </div>
+                 if($payee == 1) {
+                    echo
+                    <<<CODEHTML
+                        <img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>
+                    CODEHTML;
+                 }
 
-        <div class=carte_visite>
-            <div class="card_header">
-                <div class="check_icons">
-                    <img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>
-                    <img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>
+                 else {
+                    echo
+                    <<<CODEHTML
+                        <img src="./assets/images/unpaid.png" width="30px" height="30px"><p>Non-payée</p>
+                    CODEHTML;
+                 }
 
-                </div>
-                <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#"><img src="./assets/images/delete.png"></a>
-                </div>
-            </div>
-
-            <div class="carte_body card_body">
-                <h2>Chez Mme Truc</h2>
-                <p>Le 6/12/2019 à 14h30</p>
-                <p><span class="bold">Prestations : Prestation 1 | Prestation 2</span></p>
-                <h3>Prix total: 20 €</h3>
-            </div>
-        </div>
+                 echo
+                 <<<CODEHTML
+                    </div>
+                        <div class="icon_card">
+                            <img src="./assets/images/edit.png" id="" class="icon_edit">
+                            <a href="#"><img src="./assets/images/delete.png"></a>
+                    </div>
+                    </div>
+                    <div class="carte_body card_body">
+                        <h2>Chez $client_prenom $client_nom</h2>
+                        <p>Le $date à $heure</p>
+                        <p><span class="bold">Prestations : Prestation 1 | Prestation 2</span></p>
+                        <h3>Prix total: $prix_total €</h3>
+                    </div>
+                    </div>
+                 CODEHTML;
+            }
+        ?>
