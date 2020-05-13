@@ -43,10 +43,58 @@
     /*La fonction lireTable est trop basique pour permettre des nuances telles que des jointures, je crée donc des fonctions
     spécifiques pour les cas particuliers*/
     
-    function lireTableVisites() {
+    function lireTableVisites($limite) {
+        if($limite == true) {
+            $requete =
+            <<<CODESQL
+                SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id LIMIT 4
+            CODESQL;
+        }
+
+        else {
+            $requete =
+            <<<CODESQL
+                SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id
+            CODESQL;
+        }
+
+        $resultat = envoyerRequeteSQL($requete, []);
+
+        $tabLigne = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tabLigne;
+    }
+
+    function lirePrestasDansVisites($visite_id) {
+        $requete = 
+        <<<CODESQL
+            SELECT visites_prestations.*, prestations.nom AS nom_presta FROM visites_prestations INNER JOIN prestations ON visites_prestations.prestations_id=prestations.id WHERE visites_id=$visite_id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete, []);
+
+        $tabLigne = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tabLigne;
+    }
+
+    function lireImpayes() {
         $requete =
         <<<CODESQL
-            SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id
+        SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id WHERE payee=0 LIMIT 4
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete, []);
+
+        $tabLigne = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tabLigne;
+    }
+
+    function afficherProfilClient($id_client) {
+        $requete =
+        <<<CODESQL
+            SELECT * FROM clients WHERE id=$id_client
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete, []);

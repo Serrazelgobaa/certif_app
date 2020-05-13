@@ -11,27 +11,7 @@
 			<h2 class="titre_client">Clients</h2>
 
             <?php
-            	require "php/functions.php";
-
-				$tabLigne = lireTable("clients");
-
-				foreach($tabLigne as $client) {
-					$prenom = $client["prenom"];
-					$nom = $client["nom"];
-
-					echo
-					<<<CODEHTML
-						<div class="client">
-							<h4 class="client_titre" id="">$prenom $nom</h4>
-								<div class="client_icons">
-								<img src="./assets/images/edit.png" class="icon_edit" id="">
-								<a href="#"><img src="./assets/images/delete.png" height="30px" width="30px"/></a>
-								</div> 
-							</div>
-							<hr class="client_separateur">
-					CODEHTML;
-				}
-			
+            	require "php/model/liste_clients.php";
 			?>
             
 		</div>
@@ -39,7 +19,7 @@
 
 
 		<div class="container_clients">
-			<img src="images/croix.png" width="40px" height="40px" id="croix">
+			<img src="./assets/images/croix.png" width="40px" height="40px" id="croix">
 			<div  id="profil_client">
 				
 			</div>
