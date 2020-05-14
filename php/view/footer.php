@@ -1,6 +1,12 @@
+
         </main>
+        <div id="espace_confirmation" class="hidden">
+            <p id="confirm_text"></p>
+            <img src="assets/images/croix.png" id="croix_confirm" height="25px" width="25px">
+        </div>
 
         <script type="text/javascript" src="assets/js/menu.js"></script>
+        <script type="text/javascript" src="assets/js/formulaires_ajax.js"></script>
 
         <?php
         

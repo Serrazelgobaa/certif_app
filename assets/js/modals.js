@@ -28,6 +28,14 @@ const fermerCreerPresta = () => {
 	document.getElementById('modal_creation_presta').classList.add('hidden');
 };
 
+const afficherConfirmation = () => {
+	document.getElementById('espace_confirmation').classList.remove('hidden');
+};
+
+const masquerConfirmation = () => {
+	document.getElementById('espace_confirmation').classList.add('hidden');
+};
+
 
 const button = document.getElementById('create_button');
 
@@ -49,3 +57,10 @@ else if (button.classList.contains('create_presta')){
 	document.getElementById('croix5').addEventListener('click',fermerCreerPresta);
 	document.getElementById('noir_modal').addEventListener('click',fermerCreerPresta);
 }
+
+listeFormAjax.forEach((balise) => {
+	balise.addEventListener('submit', fermerCreerPresta);
+	balise.addEventListener('submit', afficherConfirmation);
+});
+
+document.getElementById('croix_confirm').addEventListener('click',masquerConfirmation);

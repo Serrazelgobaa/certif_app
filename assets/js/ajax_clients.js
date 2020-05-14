@@ -10,7 +10,7 @@ $(document).ready(function() {
 
 			const idClient= $(this).attr("id");
 
-			$("#profil_client").load("php/model/profil_client.php?id="+idClient+"");
+			$("#profil_client").load("profil_client_racine.php?id="+idClient+"");
 
 			glisserGauche();
 		});

@@ -17,7 +17,8 @@
  	60 -> Nav bar
 
  	71 -> Partie noire Modal
- 	72 -> Modal
+	72 -> Modal
+	73 -> Message confirmation 
 
 */
 
@@ -37,6 +38,35 @@ body.grey {
 
 a {
 	text-decoration: none;
+}
+
+#espace_confirmation {
+	position: fixed;
+	bottom: 0;
+	background-color:#BBDEFB;
+	height: 40px;
+	width: 100%;
+	z-index: 73;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	box-shadow: 5px 0px 4px rgba(0,0,0,0.5);
+	padding-left: 25px;
+	padding-right: 25px;
+	box-sizing: border-box;
+}
+
+#espace_confirmation.hidden {
+	display: none;
+}
+
+#croix_confirm {
+	opacity: 0.7;
+	cursor: pointer;
+}
+
+#croix_confirm:hover {
+	opacity: 1;
 }
 
 /* ////////////// NAV BAR ///////////////////////// */

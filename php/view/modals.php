@@ -55,11 +55,12 @@
 
 <div id="modal_creation_presta" class="hidden">
 	<img src="./assets/images/croix.png" id="croix5" width="35px" height="35px">
-	<form action="./prestations.php?create=true" method="post">
+	<form action="api_json.php" method="post" class="ajax">
 		<h2>Nouvelle prestation</h2>
-		<label for="nv_presta_nom" name="nv_presta_nom">Nom : </label><br><input type="text" name="nv_presta_nom" id="nv_presta_nom"><br>
-		<label for="nv_presta_desc" name="nv_presta_desc">Description : </label><br><textarea name="nv_presta_desc" id="nv_presta_nom"></textarea><br>
-		<label for="nv_presta_prix" name="nv_presta_prix">Tarif : </label><br><input type="text" name="nv_presta_prix" id="nv_presta_prix"> €<br>
+		<label for="nv_presta_nom" name="nv_presta_nom">Nom : </label><br><input type="text" name="nv_presta_nom" id="nv_presta_nom" class="champ"><br>
+		<label for="nv_presta_desc" name="nv_presta_desc">Description : </label><br><textarea name="nv_presta_desc" id="nv_presta_desc" class="champ"></textarea><br>
+		<label for="nv_presta_prix" name="nv_presta_prix">Tarif : </label><br><input type="text" name="nv_presta_prix" id="nv_presta_prix" class="champ"> €<br>
+		<input type="hidden" name="idFormulaire" value="nv_presta">
 		
 		<input type="submit" value="Ajouter la prestation" class="submit_modal" name="submit">
 

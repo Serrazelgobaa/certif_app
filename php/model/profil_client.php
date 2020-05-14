@@ -1,7 +1,5 @@
 <?php
-    $id_client = $_GET["id"];
-
-    require_once "../functions.php";
+    require_once "php/functions.php";
 
     $tabLigne = afficherProfilClient($id_client);
 

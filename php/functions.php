@@ -104,5 +104,14 @@
         return $tabLigne;
     }
 
+    function insererLignePresta($tabAssoPrestas) {
+        $requete =
+        <<<CODESQL
+            INSERT INTO prestations (nom,description,prix) VALUES (:nom,:description,:prix)
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoPrestas);
+    }
+
 ?>
 

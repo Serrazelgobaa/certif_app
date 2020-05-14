@@ -7,6 +7,10 @@
 	<div id="container_modal">
 	
 	</div>
+
+    <div class="liste_prestas">
         <?php
             require "php/model/liste_prestations.php";
         ?>
+
+    </div>
