@@ -741,7 +741,7 @@ input[type=radio] {
 	cursor: pointer;
 }
 
-#croix5:hover, #croix4:hover, #croix6:hover {
+#croix5:hover, #croix4:hover, #croix6:hover, #croix_modal_suppr:hover {
 	opacity: 1;
 }
 
@@ -811,6 +811,77 @@ textarea {
 #modal_edit_client h2 {
 	margin-top: 20px;
 	margin-left: 35px;
+}
+
+#modal_confirm_suppr {
+	display: flex;
+	flex-direction: column;
+	background-color: white;
+	position: fixed;
+	z-index: 72;
+	left: 0;
+	right: 0;
+	top:25%;
+	bottom: 0;
+	margin-left: auto;
+	margin-right: auto;
+	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
+	border-radius: 15px;
+	height: 200px;
+	width: 350px;
+}
+
+#croix_modal_suppr {
+	opacity: 0.6;
+}
+
+#modal_confirm_suppr p {
+	text-align: center;
+	margin: 0;
+
+}
+
+#modal_suppr_header {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: 50px;
+	box-sizing: border-box;
+	padding-right: 10px;
+}
+
+#modal_suppr_body {
+	height: 90px;
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+#modal_suppr_footer {
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	box-sizing: border-box;
+	padding-bottom: 15px;
+}
+
+#modal_confirm_suppr.hidden {
+	display: none;
+}
+
+#suppr_submit {
+	border: 0;
+	background-color: #BBDEFB;
+	margin-right: 40px;
+	width: 100px;
+	border-radius: 8px;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.25);
+}
+
+#suppr_cancel {
+	border: 0;
+	width: 100px;
+	border-radius: 8px;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.25);
 }
 
 

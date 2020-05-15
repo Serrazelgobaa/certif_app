@@ -66,3 +66,23 @@
 
 	</form>
 </div>
+
+<!------------- CONFIRMER LA SUPPRESSION D'UN ELEMENT ----------->
+
+<div id="modal_confirm_suppr" class="hidden">
+	<div id="modal_suppr_header">
+		<img src="./assets/images/croix.png" id="croix_modal_suppr" width="35px" height="35px">
+	</div>
+		<form action="api_json.php" method="post" class="ajax">
+			<div id="modal_suppr_body">
+				<p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>
+				<input type="hidden" name="idFormulaire" value="delete">
+				<input type="hidden" name="deleteWhat" value="" id="deleteWhat">
+				<input type="hidden" name="idToDelete" value="" id="idToDelete">
+			</div>
+			<div id="modal_suppr_footer">
+				<input type="submit" value="Confirmer" name="submit" id="suppr_submit">
+				<button id="suppr_cancel">Annuler</button>
+			</div>
+		</form>
+</div>

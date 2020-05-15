@@ -42,9 +42,7 @@ const construireCartePresta = (tabPresta) => {
                 <h2 class="titre_client">${presta.nom}</h2>
                 <div class="icon_card">
                     <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#">
-                        <img src="./assets/images/delete.png">
-                    </a>
+                    <img src="./assets/images/delete.png" class="delete prestation" data-id="${presta.id}">
                 </div>
             </div>
             <div class="body_card">
@@ -55,5 +53,8 @@ const construireCartePresta = (tabPresta) => {
         `;
 
         baliseListePrestas.insertAdjacentHTML('beforeend', codeHTML);
+
     });
+
+    verifierIcones();
 };

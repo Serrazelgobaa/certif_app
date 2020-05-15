@@ -36,6 +36,46 @@ const masquerConfirmation = () => {
 	document.getElementById('espace_confirmation').classList.add('hidden');
 };
 
+const afficherSupprModal = () => {
+
+	document.getElementById('noir_modal').classList.remove('hidden');
+	document.getElementById('modal_confirm_suppr').classList.remove('hidden');
+};
+
+const masquerSupprModal = () => {
+	document.getElementById('noir_modal').classList.add('hidden');
+	document.getElementById('modal_confirm_suppr').classList.add('hidden');
+
+	deleteWhat.value = "";
+	idToDelete.value = "";
+}
+
+const verifierIcones = () => {
+
+	let iconesSuppr = document.querySelectorAll('.delete');
+	console.log("vérification faite !");
+
+	iconesSuppr.forEach((icone) => {
+
+		icone.addEventListener('click', () => {
+			if(icone.classList.contains('prestation')){
+				deleteWhat.value="prestations";
+			}
+		
+			else if(icone.classList.contains('visite')) {
+				deleteWhat.value="visite";
+			}
+		
+			else if(icone.classList.contains('client')) {
+				deleteWhat.value="client";
+			}
+			iconeId = icone.getAttribute('data-id');
+			idToDelete.value = iconeId;
+			afficherSupprModal();
+		});
+	});
+};
+
 
 const button = document.getElementById('create_button');
 
@@ -58,9 +98,29 @@ else if (button.classList.contains('create_presta')){
 	document.getElementById('noir_modal').addEventListener('click',fermerCreerPresta);
 }
 
+const deleteWhat = document.getElementById('deleteWhat');
+const idToDelete = document.getElementById('idToDelete');
+
+document.addEventListener('DOMContentLoaded', () =>{
+	deleteWhat.value = "";
+	idToDelete.value = "";
+
+	verifierIcones();
+});
+
 listeFormAjax.forEach((balise) => {
-	balise.addEventListener('submit', fermerCreerPresta);
-	balise.addEventListener('submit', afficherConfirmation);
+	balise.addEventListener('submit', () => {
+		fermerCreerPresta();
+		masquerSupprModal();
+		afficherConfirmation();
+	});
 });
 
 document.getElementById('croix_confirm').addEventListener('click',masquerConfirmation);
+
+document.getElementById('croix_modal_suppr').addEventListener('click',masquerSupprModal);
+document.getElementById('suppr_cancel').addEventListener('click', (event) => {
+	event.preventDefault();
+	masquerSupprModal();
+});
+document.getElementById('noir_modal').addEventListener('click',masquerSupprModal);

@@ -7,6 +7,7 @@
         $nom = $prestation["nom"];
         $description = $prestation["description"];
         $prix = $prestation["prix"];
+        $id = $prestation["id"];
 
         echo
     <<<CODEHTML
@@ -15,9 +16,7 @@
                 <h2 class="titre_client">$nom</h2>
                 <div class="icon_card">
                     <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#">
-                        <img src="./assets/images/delete.png">
-                    </a>
+                    <img src="./assets/images/delete.png" class="delete prestation" data-id="$id">
                 </div>
             </div>
             <div class="body_card">

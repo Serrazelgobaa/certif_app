@@ -113,5 +113,14 @@
         $resultat = envoyerRequeteSQL($requete,$tabAssoPrestas);
     }
 
+    function supprimerLigne($table,$id) {
+        $requete =
+        <<<CODESQL
+            DELETE FROM $table WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,[]);
+    }
+
 ?>
 

@@ -7,6 +7,10 @@
         if($idFormulaire == "nv_presta") {
             require "php/controller/traitement_nv_presta.php";
         }
+
+        if($idFormulaire == "delete") {
+            require "php/controller/traitement_delete.php";
+        }
     }
     
 
