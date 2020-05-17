@@ -15,6 +15,7 @@ listeFormAjax.forEach((balise) => {
         })
         .then((objetJS) => {
 
+
             if(objetJS.confirmation) {
                 document.getElementById('confirm_text').innerHTML = objetJS.confirmation;
             }
@@ -24,6 +25,40 @@ listeFormAjax.forEach((balise) => {
             }
         });
     });
+});
+
+const verifierIconesEdit = () => {
+    let iconEdit = document.querySelectorAll('.icon_edit');
+
+    iconEdit.forEach((icone) => {
+        icone.addEventListener('click', () => {
+
+            let idToEdit = icone.getAttribute('data-id');
+
+            console.log(idToEdit);
+
+            if(icone.classList.contains('prestations')) {
+                fetch("json_edit.php?edit=prestations&id="+idToEdit+"")
+                .then((response) => {
+                    return response.json();
+
+                })
+                .then((objetJSEdit) => {
+                    if(objetJSEdit.reponse) {
+                        remplirModale(objetJSEdit.reponse,"prestations");
+                    }
+                })
+            }
+        
+            afficherModalEdit();
+        });
+    });
+    
+}
+
+document.addEventListener('DOMContentLoaded', () =>{
+
+	verifierIconesEdit();
 });
 
 const construireCartePresta = (tabPresta) => {
@@ -41,7 +76,7 @@ const construireCartePresta = (tabPresta) => {
             <div class="card_header">
                 <h2 class="titre_client">${presta.nom}</h2>
                 <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
+                    <img src="./assets/images/edit.png" id="" class="icon_edit prestations" data-id="${presta.id}">
                     <img src="./assets/images/delete.png" class="delete prestation" data-id="${presta.id}">
                 </div>
             </div>
@@ -57,4 +92,36 @@ const construireCartePresta = (tabPresta) => {
     });
 
     verifierIcones();
+    verifierIconesEdit();
+};
+
+const remplirModale = (infosEdit,editWhat) => {
+    if (editWhat == "prestations") {
+        const modaleEdit = document.getElementById('form_ajax_edit');
+
+        if(modaleEdit == null) {
+            return;
+        }
+
+        modaleEdit.innerHTML = "";
+
+        infosEdit.forEach((info) => {
+            const codeHTML= `
+		        <h2>Modifier la prestation</h2>
+		        <label for="edit_presta_nom" name="edit_presta_nom">Nom : </label><br><input type="text" name="edit_presta_nom" id="edit_presta_nom" value="${info.nom}"><br>
+
+		    <label for="edit_presta_desc" name="edit_presta_desc">Description : </label><br><textarea name="edit_presta_desc" id="edit_presta_desc">${info.description}</textarea><br>
+
+		    <label for="edit_presta_prix" name="edit_presta_prix">Tarif : </label><br><input type="text" name="edit_presta_prix" id="edit_presta_prix" value="${info.prix}"> €<br>
+
+		    <input type="hidden" name="idFormulaire" value="edit">
+		    <input type="hidden" name="editWhat" value="prestations" id="editWhat">
+		    <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
+		    <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">
+            `;
+
+            modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
+        });
+
+    }
 };

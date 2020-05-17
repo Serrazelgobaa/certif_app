@@ -67,6 +67,15 @@
 	</form>
 </div>
 
+<!------------- MODIFIER UNE PRESTATION EXISTANTE --------------->
+
+<div id="modal_modif_presta" class="hidden">
+	<img src="./assets/images/croix.png" id="croix6" width="35px" height="35px">
+	<form action="api_json.php" method="post" class="ajax" id="form_ajax_edit">
+		
+	</form>
+</div>
+
 <!------------- CONFIRMER LA SUPPRESSION D'UN ELEMENT ----------->
 
 <div id="modal_confirm_suppr" class="hidden">

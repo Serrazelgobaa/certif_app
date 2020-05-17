@@ -8,6 +8,10 @@
             require "php/controller/traitement_nv_presta.php";
         }
 
+        if($idFormulaire == "edit") {
+            require "php/controller/traitement_edit.php";
+        }
+
         if($idFormulaire == "delete") {
             require "php/controller/traitement_delete.php";
         }

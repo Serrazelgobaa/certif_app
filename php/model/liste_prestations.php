@@ -15,7 +15,7 @@
             <div class="card_header">
                 <h2 class="titre_client">$nom</h2>
                 <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
+                    <img src="./assets/images/edit.png" class="icon_edit prestations" data-id="$id">
                     <img src="./assets/images/delete.png" class="delete prestation" data-id="$id">
                 </div>
             </div>

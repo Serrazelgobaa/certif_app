@@ -40,6 +40,19 @@
         return $tabLigne;
     }
 
+    function lireLigne($table,$id) {
+        $requete =
+        <<<CODESQL
+            SELECT * FROM $table WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete, []);
+
+        $tabLigne = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tabLigne;
+    }
+
     /*La fonction lireTable est trop basique pour permettre des nuances telles que des jointures, je crée donc des fonctions
     spécifiques pour les cas particuliers*/
     
@@ -120,6 +133,15 @@
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete,[]);
+    }
+
+    function modifierLignePresta($id, $tabAssoPrestas) {
+        $requete =
+        <<<CODESQL
+        UPDATE prestations SET nom = :nom, description = :description, prix = :prix WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoPrestas);
     }
 
 ?>
