@@ -97,9 +97,6 @@ else if (button.classList.contains('create_presta')){
 	button.addEventListener('click', (event) => {
 		ouvrirModale('modal_creation_presta');
 	});
-	document.getElementById('croix5').addEventListener('click',(event) => {
-		fermerModale('modal_creation_presta');
-	});
 }
 
 const deleteWhat = document.getElementById('deleteWhat');
@@ -121,18 +118,10 @@ listeFormAjax.forEach((balise) => {
 
 document.getElementById('croix_confirm').addEventListener('click',masquerConfirmation);
 
-document.getElementById('croix_modal_suppr').addEventListener('click',(event) => {
-	fermerModale('modal_confirm_suppr');
-	reinitChampsCaches();
-});
 document.getElementById('suppr_cancel').addEventListener('click', (event) => {
 	event.preventDefault();
 	fermerModale('modal_confirm_suppr');
 	reinitChampsCaches();
-});
-
-document.getElementById('croix6').addEventListener('click', (event) => {
-	fermerModale('modal_modif_presta');
 });
 
 

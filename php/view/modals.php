@@ -54,15 +54,19 @@
 <!------------- AJOUTER UNE NOUVELLE PRESTATION ---------------->
 
 <div id="modal_creation_presta" class="fenetre_modale hidden">
-	<img src="./assets/images/croix.png" id="croix5" width="35px" height="35px">
 	<form action="api_json.php" method="post" class="ajax">
-		<h2>Nouvelle prestation</h2>
-		<label for="nv_presta_nom" name="nv_presta_nom">Nom : </label><br><input type="text" name="nv_presta_nom" id="nv_presta_nom" class="champ"><br>
-		<label for="nv_presta_desc" name="nv_presta_desc">Description : </label><br><textarea name="nv_presta_desc" id="nv_presta_desc" class="champ"></textarea><br>
-		<label for="nv_presta_prix" name="nv_presta_prix">Tarif : </label><br><input type="text" name="nv_presta_prix" id="nv_presta_prix" class="champ"> €<br>
-		<input type="hidden" name="idFormulaire" value="nv_presta">
-		
-		<input type="submit" value="Ajouter la prestation" class="submit_modal" name="submit">
+		<div class="modal_header">
+			<h2>Nouvelle prestation</h2>
+			<label for="nv_presta_nom" name="nv_presta_nom"><h3>Nom : </h3></label><input type="text" name="nv_presta_nom" id="nv_presta_nom" class="champ"><br>
+		</div>
+		<div class="modal_body">
+			<label for="nv_presta_desc" name="nv_presta_desc"><h3>Description : </h3></label><textarea name="nv_presta_desc" id="nv_presta_desc" class="champ"></textarea><br>
+			<label for="nv_presta_prix" name="nv_presta_prix"><h3>Tarif : </h3></label><input type="text" name="nv_presta_prix" id="nv_presta_prix" class="presta_prix champ"> €<br>
+			<input type="hidden" name="idFormulaire" value="nv_presta">
+			<div class="modal_footer">
+				<input type="submit" value="Ajouter la prestation" class="submit_modal" name="submit">
+			</div>
+		</div>
 
 	</form>
 </div>
@@ -70,7 +74,6 @@
 <!------------- MODIFIER UNE PRESTATION EXISTANTE --------------->
 
 <div id="modal_modif_presta" class="fenetre_modale hidden">
-	<img src="./assets/images/croix.png" id="croix6" width="35px" height="35px">
 	<form action="api_json.php" method="post" class="ajax" id="form_ajax_edit">
 		
 	</form>
@@ -79,9 +82,6 @@
 <!------------- CONFIRMER LA SUPPRESSION D'UN ELEMENT ----------->
 
 <div id="modal_confirm_suppr" class="fenetre_modale hidden">
-	<div id="modal_suppr_header">
-		<img src="./assets/images/croix.png" id="croix_modal_suppr" width="35px" height="35px">
-	</div>
 		<form action="api_json.php" method="post" class="ajax">
 			<div id="modal_suppr_body">
 				<p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>

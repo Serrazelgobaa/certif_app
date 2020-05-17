@@ -107,17 +107,23 @@ const remplirModale = (infosEdit,editWhat) => {
 
         infosEdit.forEach((info) => {
             const codeHTML= `
+            <div class="modal_header">
 		        <h2>Modifier la prestation</h2>
 		        <label for="edit_presta_nom" name="edit_presta_nom">Nom : </label><br><input type="text" name="edit_presta_nom" id="edit_presta_nom" value="${info.nom}"><br>
+            </div>
 
-		    <label for="edit_presta_desc" name="edit_presta_desc">Description : </label><br><textarea name="edit_presta_desc" id="edit_presta_desc">${info.description}</textarea><br>
+            <div class="modal_body">
+		        <label for="edit_presta_desc" name="edit_presta_desc">Description : </label><br><textarea name="edit_presta_desc" id="edit_presta_desc">${info.description}</textarea><br>
 
-		    <label for="edit_presta_prix" name="edit_presta_prix">Tarif : </label><br><input type="text" name="edit_presta_prix" id="edit_presta_prix" value="${info.prix}"> €<br>
+		        <label for="edit_presta_prix" name="edit_presta_prix">Tarif : </label><br><input type="text" name="edit_presta_prix" id="edit_presta_prix" value="${info.prix}"> €<br>
 
-		    <input type="hidden" name="idFormulaire" value="edit">
-		    <input type="hidden" name="editWhat" value="prestations" id="editWhat">
-		    <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
-		    <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">
+		        <input type="hidden" name="idFormulaire" value="edit">
+		        <input type="hidden" name="editWhat" value="prestations" id="editWhat">
+                <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
+                <div class="modal_footer">
+                    <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">
+                </div>
+            </div>
             `;
 
             modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
