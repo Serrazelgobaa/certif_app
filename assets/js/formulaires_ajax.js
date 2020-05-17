@@ -50,7 +50,7 @@ const verifierIconesEdit = () => {
                 })
             }
         
-            afficherModalEdit();
+            ouvrirModale('modal_modif_presta');
         });
     });
     

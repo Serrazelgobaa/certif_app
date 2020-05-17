@@ -4,7 +4,7 @@
 <!------------- AJOUTER UN NOUVEAU CLIENT ---------------->
 
 
-<div id="modal_creation_client" class="hidden">
+<div id="modal_creation_client" class="fenetre_modale hidden">
 	<img src="./assets/images/croix.png" id="croix3" width="35px" height="35px">
 	<form action="./clients.php?create=true" method="post">
 		<h2>Nouveau client</h2>
@@ -25,7 +25,7 @@
 
 <!------------- AJOUTER UNE NOUVELLE VISITE ---------------->
 
-<div id="modal_creation_visite" class="hidden">
+<div id="modal_creation_visite" class="fenetre_modale hidden">
 	<img src="./assets/images/croix.png" id="croix4" width="35px" height="35px">
 	<form action="./visites.php?create=true" method="post">
 		<h2>Nouvelle visite</h2>
@@ -53,7 +53,7 @@
 
 <!------------- AJOUTER UNE NOUVELLE PRESTATION ---------------->
 
-<div id="modal_creation_presta" class="hidden">
+<div id="modal_creation_presta" class="fenetre_modale hidden">
 	<img src="./assets/images/croix.png" id="croix5" width="35px" height="35px">
 	<form action="api_json.php" method="post" class="ajax">
 		<h2>Nouvelle prestation</h2>
@@ -69,7 +69,7 @@
 
 <!------------- MODIFIER UNE PRESTATION EXISTANTE --------------->
 
-<div id="modal_modif_presta" class="hidden">
+<div id="modal_modif_presta" class="fenetre_modale hidden">
 	<img src="./assets/images/croix.png" id="croix6" width="35px" height="35px">
 	<form action="api_json.php" method="post" class="ajax" id="form_ajax_edit">
 		
@@ -78,7 +78,7 @@
 
 <!------------- CONFIRMER LA SUPPRESSION D'UN ELEMENT ----------->
 
-<div id="modal_confirm_suppr" class="hidden">
+<div id="modal_confirm_suppr" class="fenetre_modale hidden">
 	<div id="modal_suppr_header">
 		<img src="./assets/images/croix.png" id="croix_modal_suppr" width="35px" height="35px">
 	</div>

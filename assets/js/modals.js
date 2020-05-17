@@ -1,76 +1,21 @@
-/* MODALE DE CREATION DE CLIENT */
-
-	/* OUVRIR */
-
-const ouvrirCreerClient = () => {
-	document.getElementById('noir_modal').classList.remove('hidden');
-	document.getElementById('modal_creation_client').classList.remove('hidden');
-};
-
-	/* FERMER */
-
-const fermerCreerClient = () => {
-	document.getElementById('noir_modal').classList.add('hidden');
-	document.getElementById('modal_creation_client').classList.add('hidden');
-};
-
-/* MODALE DE CREATION DE VISITE */
-
-	/* OUVRIR */
-
-const ouvrirCreerVisite = () => {
-	document.getElementById('noir_modal').classList.remove('hidden');
-	document.getElementById('modal_creation_visite').classList.remove('hidden');
-};
-
-	/* FERMER */
-
-const fermerCreerVisite = () => {
-	document.getElementById('noir_modal').classList.add('hidden');
-	document.getElementById('modal_creation_visite').classList.add('hidden');
-};
-
-/* MODALE DE CREATION DE PRESTATION */
-
-	/* OUVRIR */
-
-const ouvrirCreerPresta = () => {
-	document.getElementById('noir_modal').classList.remove('hidden');
-	document.getElementById('modal_creation_presta').classList.remove('hidden');
-};
-
-	/* FERMER */
-
-const fermerCreerPresta = () => {
-	document.getElementById('noir_modal').classList.add('hidden');
-	document.getElementById('modal_creation_presta').classList.add('hidden');
-};
-
-/* MODALE DE MODIFICATION DE CLIENT */
-
-	/* OUVRIR */
-
-	/* FERMER */
-
-/* MODALE DE MODIFICATION DE VISITE */
-
-	/* OUVRIR */
-
-	/* FERMER */
-
-/* MODALE DE MODIFICATION DE PRESTATION */
-
-	/* OUVRIR */
-
-const afficherModalEdit = () => {
-	document.getElementById('modal_modif_presta').classList.remove('hidden');
+const ouvrirModale = (nomModale) => {
+	document.getElementById(nomModale).classList.remove('hidden');
 	document.getElementById('noir_modal').classList.remove('hidden');
 };
 
-	/* FERMER */
+const fermerModale = (nomModale) => {
+	if (nomModale == "all") {
+		fenetres = document.querySelectorAll('.fenetre_modale');
 
-const fermerModalEdit = () => {
-	document.getElementById('modal_modif_presta').classList.add('hidden');
+		fenetres.forEach((fenetre) => {
+			fenetre.classList.add('hidden');
+		});
+	}
+
+	else {
+		document.getElementById(nomModale).classList.add('hidden');
+	}
+
 	document.getElementById('noir_modal').classList.add('hidden');
 };
 
@@ -88,22 +33,7 @@ const masquerConfirmation = () => {
 	document.getElementById('espace_confirmation').classList.add('hidden');
 };
 
-/* MODALE DE SUPPRESSION D'ELEMENT */
-
-	/* OUVRIR */
-
-const afficherSupprModal = () => {
-
-	document.getElementById('noir_modal').classList.remove('hidden');
-	document.getElementById('modal_confirm_suppr').classList.remove('hidden');
-};
-
-	/* FERMER */
-
-const masquerSupprModal = () => {
-	document.getElementById('noir_modal').classList.add('hidden');
-	document.getElementById('modal_confirm_suppr').classList.add('hidden');
-
+const reinitChampsCaches = () => {
 	deleteWhat.value = "";
 	idToDelete.value = "";
 }
@@ -133,7 +63,7 @@ const verifierIcones = () => {
 			}
 			iconeId = icone.getAttribute('data-id');
 			idToDelete.value = iconeId;
-			afficherSupprModal();
+			ouvrirModale('modal_confirm_suppr');
 		});
 	});
 
@@ -143,22 +73,33 @@ const verifierIcones = () => {
 const button = document.getElementById('create_button');
 
 if (button.classList.contains('create_client')) {
-	button.addEventListener('click', ouvrirCreerClient);
-	document.getElementById('croix3').addEventListener('click',fermerCreerClient);
-	document.getElementById('noir_modal').addEventListener('click',fermerCreerClient);
+	button.addEventListener('click', (event) => {
+		ouvrirModale('modal_creation_client');
+	});
+	document.getElementById('croix3').addEventListener('click',(event) => {
+		fermerModale('modal_creation_client');
+	});
 }
 
 else if (button.classList.contains('create_visite')){
-	button.addEventListener('click', ouvrirCreerVisite);
-	document.getElementById('create_button2').addEventListener('click',ouvrirCreerVisite);
-	document.getElementById('croix4').addEventListener('click',fermerCreerVisite);
-	document.getElementById('noir_modal').addEventListener('click',fermerCreerVisite);
+	button.addEventListener('click', (event) => {
+		ouvrirModale('modal_creation_visite');
+	});
+	document.getElementById('create_button2').addEventListener('click',(event) => {
+		ouvrirModale('modal_creation_visite');
+	});
+	document.getElementById('croix4').addEventListener('click', (event) => {
+		fermerModale('modal_creation_visite');
+	});
 }
 
 else if (button.classList.contains('create_presta')){
-	button.addEventListener('click', ouvrirCreerPresta);
-	document.getElementById('croix5').addEventListener('click',fermerCreerPresta);
-	document.getElementById('noir_modal').addEventListener('click',fermerCreerPresta);
+	button.addEventListener('click', (event) => {
+		ouvrirModale('modal_creation_presta');
+	});
+	document.getElementById('croix5').addEventListener('click',(event) => {
+		fermerModale('modal_creation_presta');
+	});
 }
 
 const deleteWhat = document.getElementById('deleteWhat');
@@ -173,22 +114,28 @@ document.addEventListener('DOMContentLoaded', () =>{
 
 listeFormAjax.forEach((balise) => {
 	balise.addEventListener('submit', () => {
-		fermerCreerPresta();
-		masquerSupprModal();
 		afficherConfirmation();
-		fermerModalEdit();
+		fermerModale('all');
 	});
 });
 
 document.getElementById('croix_confirm').addEventListener('click',masquerConfirmation);
 
-document.getElementById('croix_modal_suppr').addEventListener('click',masquerSupprModal);
+document.getElementById('croix_modal_suppr').addEventListener('click',(event) => {
+	fermerModale('modal_confirm_suppr');
+	reinitChampsCaches();
+});
 document.getElementById('suppr_cancel').addEventListener('click', (event) => {
 	event.preventDefault();
-	masquerSupprModal();
+	fermerModale('modal_confirm_suppr');
+	reinitChampsCaches();
 });
 
-document.getElementById('noir_modal').addEventListener('click',masquerSupprModal);
+document.getElementById('croix6').addEventListener('click', (event) => {
+	fermerModale('modal_modif_presta');
+});
 
-document.getElementById('croix6').addEventListener('click', fermerModalEdit);
-document.getElementById('noir_modal').addEventListener('click',fermerModalEdit);
+
+document.getElementById('noir_modal').addEventListener('click',(event) => {
+	fermerModale('all');
+});
