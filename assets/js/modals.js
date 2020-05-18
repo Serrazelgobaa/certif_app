@@ -51,14 +51,14 @@ const verifierIcones = () => {
 
 		icone.addEventListener('click', () => {
 			if(icone.classList.contains('prestation')){
-				deleteWhat.value="prestations";
+				deleteWhat.value="prestation";
 			}
 		
 			else if(icone.classList.contains('visite')) {
 				deleteWhat.value="visite";
 			}
 		
-			else if(icone.classList.contains('client')) {
+			else if(icone.classList.contains('clients')) {
 				deleteWhat.value="client";
 			}
 			iconeId = icone.getAttribute('data-id');

@@ -126,6 +126,15 @@
         $resultat = envoyerRequeteSQL($requete,$tabAssoPrestas);
     }
 
+    function insererLigneClient($tabAssoClients) {
+        $requete =
+        <<<CODESQL
+            INSERT INTO clients (nom,prenom,adresse,telephone,code_postal,ville,mail) VALUES (:nom,:prenom,:adresse,:telephone,:code_postal,:ville,:mail)
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoClients);
+    }
+
     function supprimerLigne($table,$id) {
         $requete =
         <<<CODESQL

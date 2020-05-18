@@ -20,8 +20,15 @@ listeFormAjax.forEach((balise) => {
                 document.getElementById('confirm_text').innerHTML = objetJS.confirmation;
             }
 
-            if(objetJS.tabPresta) {
-                construireCartePresta(objetJS.tabPresta);
+            if(objetJS.tabLigne) {
+
+                if(objetJS.typeElement == "prestation") {
+                    construireCartePresta(objetJS.tabLigne);
+                }
+
+                if(objetJS.typeElement == "client") {
+                    construireListeClients(objetJS.tabLigne);
+                }
             }
         });
     });
@@ -35,10 +42,8 @@ const verifierIconesEdit = () => {
 
             let idToEdit = icone.getAttribute('data-id');
 
-            console.log(idToEdit);
-
             if(icone.classList.contains('prestations')) {
-                fetch("json_edit.php?edit=prestations&id="+idToEdit+"")
+                fetch("api_json.php?edit=prestations&id="+idToEdit+"")
                 .then((response) => {
                     return response.json();
 
@@ -56,9 +61,34 @@ const verifierIconesEdit = () => {
     
 }
 
+const verifierTitresClients = () => {
+
+    let titresClients = document.querySelectorAll('.client_titre');
+    
+    titresClients.forEach((titreClient) => {
+        titreClient.addEventListener('click', () => {
+            let idClient = titreClient.getAttribute('data-id');
+
+            fetch("api_json.php?profilclient=true&id="+idClient+"")
+            .then((response) => {
+                return response.json();
+            })
+            .then((objetJSProfil) => {
+                if(objetJSProfil.reponse) {
+                    remplirProfil(objetJSProfil.reponse);
+                }
+            })
+
+            glisserGauche();
+        });
+    });
+    
+};
+
 document.addEventListener('DOMContentLoaded', () =>{
 
-	verifierIconesEdit();
+    verifierIconesEdit();
+    verifierTitresClients();
 });
 
 const construireCartePresta = (tabPresta) => {
@@ -95,6 +125,68 @@ const construireCartePresta = (tabPresta) => {
     verifierIconesEdit();
 };
 
+
+const construireListeClients = (tabClients) => {
+    let baliseListeClients = document.querySelector(".liste_clients");
+
+    if(baliseListeClients == null) {
+        return;
+    }
+
+    baliseListeClients.innerHTML = "";
+
+    tabClients.forEach((client) => {
+        const codeHTML= `
+        <div class="client">
+        <h4 class="client_titre" data-id="${client.id}">${client.prenom} ${client.nom}</h4>
+            <div class="client_icons">
+            <img src="./assets/images/edit.png" class="icon_edit clients" data-id="${client.id}">
+            <img src="./assets/images/delete.png" height="30px" width="30px" class="delete clients"  data-id="${client.id}">
+            </div> 
+        </div>
+        <hr class="client_separateur">
+        `;
+
+        baliseListeClients.insertAdjacentHTML('beforeend', codeHTML);
+    });
+
+    verifierIcones();
+    verifierIconesEdit();
+    verifierTitresClients();
+};
+
+const remplirProfil = (infosProfil) => {
+    const profilContainer = document.getElementById('profil_client');
+
+    if(profilContainer == null) {
+        return;
+    }
+
+    profilContainer.innerHTML = "";
+
+    infosProfil.forEach((info) => {
+        const codeHTML = `
+            <h2>${info.prenom} ${info.nom}</h2>
+            <div class="info_client" >
+                <img src ="./assets/images/phone.png" width="40px" height="40px">
+                <p>${info.telephone}</p>
+            </div>
+            <div class="info_client">
+                <img src ="./assets/images/mail.png" width="40px" height="40px">
+                <p>${info.mail}</p>
+            </div>
+            <div class="info_client">
+                <img src ="./assets/images/home.png" width="40px" height="40px">
+                <p>${info.adresse}
+                <br>${info.code_postal} ${info.ville}</p>
+            </div>
+        `;
+
+        profilContainer.insertAdjacentHTML('beforeend', codeHTML);
+    });
+};
+
+
 const remplirModale = (infosEdit,editWhat) => {
     if (editWhat == "prestations") {
         const modaleEdit = document.getElementById('form_ajax_edit');
@@ -117,8 +209,8 @@ const remplirModale = (infosEdit,editWhat) => {
 
 		        <label for="edit_presta_prix" name="edit_presta_prix">Tarif : </label><br><input type="text" name="edit_presta_prix" id="edit_presta_prix" value="${info.prix}"> €<br>
 
-		        <input type="hidden" name="idFormulaire" value="edit">
-		        <input type="hidden" name="editWhat" value="prestations" id="editWhat">
+		        <input type="hidden" name="typeElement" value="prestation" id="editWhat">
+			    <input type="hidden" name="typeAction" value="update">
                 <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
                 <div class="modal_footer">
                     <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">

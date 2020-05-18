@@ -1,9 +1,9 @@
 <?php
     require_once "php/functions.php";
 
-    $tabLigne = afficherProfilClient($id_client);
+    $reponse = afficherProfilClient($idProfil);
 
-    foreach($tabLigne as $client) {
+    /*foreach($tabLigne as $client) {
 
         $nom = $client["nom"];
         $prenom = $client["prenom"];
@@ -30,5 +30,5 @@
                 <br>$code_postal $ville</p>
             </div>
         CODEHTML;
-    }
+    }*/
 ?>

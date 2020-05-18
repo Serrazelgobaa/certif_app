@@ -1,4 +1,4 @@
 <?php
-    $reponse = lireLigne($edit,$idToEdit);
+    $reponse = lireLigne($edit,$idToGet);
 
 ?>

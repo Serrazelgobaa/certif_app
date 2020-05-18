@@ -7,11 +7,6 @@
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <?php
-        if ($page == "clients") {
-            echo '<script type="text/javascript" src="./assets/js/ajax_clients.js"></script>';
-        }
-    ?>
 	<title><?php echo $page_title ?></title>
 </head>
 <?php

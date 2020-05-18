@@ -9,11 +9,11 @@
 
 		<div class="container_clients">
 			<h2 class="titre_client">Clients</h2>
-
-            <?php
-            	require "php/model/liste_clients.php";
-			?>
-            
+			<div class="liste_clients">
+            	<?php
+            		require "php/model/liste_clients.php";
+				?>
+            </div>
 		</div>
 		<!--fin de la liste des clients-->
 

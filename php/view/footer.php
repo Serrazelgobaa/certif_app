@@ -6,7 +6,7 @@
         </div>
 
         <script type="text/javascript" src="assets/js/menu.js"></script>
-        <script type="text/javascript" src="assets/js/formulaires_ajax.js"></script>
+        <script type="text/javascript" src="assets/js/ajax.js"></script>
 
         <?php
         

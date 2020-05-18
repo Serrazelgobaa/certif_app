@@ -6,7 +6,7 @@
 
 <div id="modal_creation_client" class="fenetre_modale hidden">
 	<img src="./assets/images/croix.png" id="croix3" width="35px" height="35px">
-	<form action="./clients.php?create=true" method="post">
+	<form action="api_json.php" method="post" class="ajax">
 		<h2>Nouveau client</h2>
 		<label for="nv_client_nom" name="nv_client_nom">Nom : </label><br><input type="text" name="nv_client_nom" id="nv_client_nom"><br>
 		<label for="nv_client_prenom" name="nv_client_prenom">Prénom : </label><br><input type="text" name="nv_client_prenom" id="nv_client_prenom"><br>
@@ -16,7 +16,8 @@
 		<label for="nv_client_tel" name="nv_client_tel">Numéro de téléphone : </label><br><input type="text" name="nv_client_tel" id="nv_client_tel"><br>
 		<label for="nv_client_mail" name="nv_client_mail">Adresse email : </label><br><input type="text" name="nv_client_mail" id="nv_client_mail"><br>
 		
-		
+		<input type="hidden" name="typeElement" value="client">
+		<input type="hidden" name="typeAction" value="create">
 		
 		<input type="submit" value="Ajouter le client" class="submit_modal">
 
@@ -62,7 +63,10 @@
 		<div class="modal_body">
 			<label for="nv_presta_desc" name="nv_presta_desc"><h3>Description : </h3></label><textarea name="nv_presta_desc" id="nv_presta_desc" class="champ"></textarea><br>
 			<label for="nv_presta_prix" name="nv_presta_prix"><h3>Tarif : </h3></label><input type="text" name="nv_presta_prix" id="nv_presta_prix" class="presta_prix champ"> €<br>
-			<input type="hidden" name="idFormulaire" value="nv_presta">
+		
+			<input type="hidden" name="typeElement" value="prestation">
+			<input type="hidden" name="typeAction" value="create">
+
 			<div class="modal_footer">
 				<input type="submit" value="Ajouter la prestation" class="submit_modal" name="submit">
 			</div>
@@ -85,8 +89,9 @@
 		<form action="api_json.php" method="post" class="ajax">
 			<div id="modal_suppr_body">
 				<p>Êtes-vous sûr de vouloir supprimer cet élément ?</p>
-				<input type="hidden" name="idFormulaire" value="delete">
-				<input type="hidden" name="deleteWhat" value="" id="deleteWhat">
+				
+				<input type="hidden" name="typeElement" value="" id="deleteWhat">
+				<input type="hidden" name="typeAction" value="delete">
 				<input type="hidden" name="idToDelete" value="" id="idToDelete">
 			</div>
 			<div id="modal_suppr_footer">
