@@ -33,24 +33,32 @@
 
             /* MODIFICATION D'UN CLIENT EXISTANT */
 
-            /*$idToEdit = $_POST["idToEdit"] ?? "";
+            $idToEdit = $_POST["idToEdit"] ?? "";
 
             if($idToEdit != "") {
 
-                $nom = $_POST["edit_presta_nom"] ?? "";
-                $prix = $_POST["edit_presta_prix"] ?? "";
-                $description = $_POST["edit_presta_desc"] ?? "";
+                $nom = $_POST["nv_client_nom"] ?? "";
+                $prenom = $_POST["nv_client_prenom"] ?? "";
+                $adresse = $_POST["nv_client_adresse"] ?? "";
+                $code_postal = $_POST["nv_client_cp"] ?? "";
+                $ville = $_POST["nv_client_ville"] ?? "";
+                $telephone = $_POST["nv_client_tel"] ?? "";
+                $mail = $_POST["nv_client_mail"] ?? "";
 
-                modifierLignePresta($idToEdit, [
+                modifierLigneClient($idToEdit, [
                     "nom" => $nom,
-                    "prix" => $prix,
-                    "description" => $description,
+                    "prenom" => $prenom,
+                    "adresse" => $adresse,
+                    "code_postal" => $code_postal,
+                    "ville" => $ville,
+                    "telephone" => $telephone,
+                    "mail" => $mail,
                 ]);
 
                 $confirmation = "Informations client modifiées !";
 
                 $tabLigne = lireTable("clients");
-            }      */
+            }      
 
         }
 

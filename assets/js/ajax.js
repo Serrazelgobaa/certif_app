@@ -27,6 +27,7 @@ listeFormAjax.forEach((balise) => {
                 }
 
                 if(objetJS.typeElement == "client") {
+                    console.log(objetJS.tabLigne);
                     construireListeClients(objetJS.tabLigne);
                 }
             }
@@ -53,9 +54,25 @@ const verifierIconesEdit = () => {
                         remplirModale(objetJSEdit.reponse,"prestations");
                     }
                 })
+
+                ouvrirModale('modal_modif_presta');
+            }
+
+            if(icone.classList.contains('clients')) {
+                fetch("api_json.php?edit=clients&id="+idToEdit+"")
+                .then((response) => {
+                    return response.json();
+
+                })
+                .then((objetJSEdit) => {
+                    if(objetJSEdit.reponse) {
+                        remplirModale(objetJSEdit.reponse,"clients");
+                    }
+                })
+
+                ouvrirModale('modal_modif_client');
             }
         
-            ouvrirModale('modal_modif_presta');
         });
     });
     
@@ -189,7 +206,7 @@ const remplirProfil = (infosProfil) => {
 
 const remplirModale = (infosEdit,editWhat) => {
     if (editWhat == "prestations") {
-        const modaleEdit = document.getElementById('form_ajax_edit');
+        const modaleEdit = document.getElementById('ajax_edit_presta');
 
         if(modaleEdit == null) {
             return;
@@ -220,6 +237,41 @@ const remplirModale = (infosEdit,editWhat) => {
 
             modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
         });
+
+    }
+
+    if(editWhat == "clients") {
+
+        const modaleEdit = document.getElementById('ajax_edit_clients');
+
+        if(modaleEdit == null) {
+            return;
+        }
+
+        modaleEdit.innerHTML = "";
+
+        infosEdit.forEach((info) => {
+            const codeHTML= `
+            <h2>Modifier un client</h2>
+            <label for="nv_client_nom" name="nv_client_nom">Nom : </label><br><input type="text" name="nv_client_nom" id="nv_client_nom" value="${info.nom}"><br>
+            <label for="nv_client_prenom" name="nv_client_prenom">Prénom : </label><br><input type="text" name="nv_client_prenom" id="nv_client_prenom" value="${info.prenom}"><br>
+            <label for="nv_client_adresse" name="nv_client_adresse">Adresse : </label><br><input type="text" name="nv_client_adresse" id="nv_client_adresse"  value="${info.adresse}"><br>
+            <label for="nv_client_cp" name="nv_client_cp">Code postal : </label><br><input type="text" name="nv_client_cp" id="nv_client_cp"  value="${info.code_postal}"><br>
+            <label for="nv_client_ville" name="nv_client_ville">Ville : </label><br><input type="text" name="nv_client_ville" id="nv_client_ville" value="${info.ville}"><br>
+            <label for="nv_client_tel" name="nv_client_tel">Numéro de téléphone : </label><br><input type="text" name="nv_client_tel" id="nv_client_tel"  value="${info.telephone}"><br>
+            <label for="nv_client_mail" name="nv_client_mail">Adresse email : </label><br><input type="text" name="nv_client_mail" id="nv_client_mail" value="${info.mail}"><br>
+            
+            <input type="hidden" name="typeElement" value="client">
+            <input type="hidden" name="typeAction" value="update">
+            <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
+            
+            <input type="submit" value="Modifier le client" class="submit_modal">
+            `;
+
+            modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
+
+        });
+            
 
     }
 };

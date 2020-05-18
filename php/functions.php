@@ -147,10 +147,19 @@
     function modifierLignePresta($id, $tabAssoPrestas) {
         $requete =
         <<<CODESQL
-        UPDATE prestations SET nom = :nom, description = :description, prix = :prix WHERE id=$id
+            UPDATE prestations SET nom = :nom, description = :description, prix = :prix WHERE id=$id
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete,$tabAssoPrestas);
+    }
+
+    function modifierLigneClient($id, $tabAssoClients) {
+        $requete =
+        <<<CODESQL
+            UPDATE clients SET nom = :nom, prenom = :prenom, adresse = :adresse, code_postal = :code_postal, ville = :ville, telephone = :telephone, mail = :mail WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoClients);
     }
 
 ?>

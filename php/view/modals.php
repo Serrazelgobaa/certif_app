@@ -75,10 +75,18 @@
 	</form>
 </div>
 
+<!------------ MODIFIER UN CLIENT EXISTANT --------------------->
+
+<div id="modal_modif_client" class="fenetre_modale hidden">
+	<form action="api_json.php" method="post" class="ajax" id="ajax_edit_clients">
+
+	</form>
+</div>
+
 <!------------- MODIFIER UNE PRESTATION EXISTANTE --------------->
 
 <div id="modal_modif_presta" class="fenetre_modale hidden">
-	<form action="api_json.php" method="post" class="ajax" id="form_ajax_edit">
+	<form action="api_json.php" method="post" class="ajax" id="ajax_edit_presta">
 		
 	</form>
 </div>

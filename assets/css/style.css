@@ -718,6 +718,10 @@ input[type=radio] {
 	border-radius: 10px;
 }
 
+.fenetre_modale.hidden {
+	display: none;
+}
+
 .modal_header {
 	background-color: #2196F3;
 	border-radius: 10px 10px 0px 0px;
