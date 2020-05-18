@@ -76,9 +76,6 @@ if (button.classList.contains('create_client')) {
 	button.addEventListener('click', (event) => {
 		ouvrirModale('modal_creation_client');
 	});
-	document.getElementById('croix3').addEventListener('click',(event) => {
-		fermerModale('modal_creation_client');
-	});
 }
 
 else if (button.classList.contains('create_visite')){

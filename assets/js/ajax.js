@@ -217,21 +217,24 @@ const remplirModale = (infosEdit,editWhat) => {
         infosEdit.forEach((info) => {
             const codeHTML= `
             <div class="modal_header">
-		        <h2>Modifier la prestation</h2>
-		        <label for="edit_presta_nom" name="edit_presta_nom">Nom : </label><br><input type="text" name="edit_presta_nom" id="edit_presta_nom" value="${info.nom}"><br>
-            </div>
+			    <h2>Modifier une prestation</h2>
+			    <label for="edit_presta_nom" name="edit_presta_nom"><h3>Nom : </h3></label>
+			    <input type="text" name="edit_presta_nom" id="edit_presta_nom" class="champ" value="${info.nom}">
+		    </div>
+		    <div class="modal_body">
+                <label for="edit_presta_desc" name="edit_presta_desc"><h3>Description : </h3></label>
+                <textarea name="edit_presta_desc" id="edit_presta_desc" class="champ">${info.description}</textarea>
 
-            <div class="modal_body">
-		        <label for="edit_presta_desc" name="edit_presta_desc">Description : </label><br><textarea name="edit_presta_desc" id="edit_presta_desc">${info.description}</textarea><br>
-
-		        <label for="edit_presta_prix" name="edit_presta_prix">Tarif : </label><br><input type="text" name="edit_presta_prix" id="edit_presta_prix" value="${info.prix}"> €<br>
-
-		        <input type="hidden" name="typeElement" value="prestation" id="editWhat">
+                <label for="edit_presta_prix" name="edit_presta_prix"><h3>Tarif : </h3></label>
+                <input type="text" name="edit_presta_prix" id="edit_presta_prix" class="presta_prix champ" value="${info.prix}"> €
+            
+                <input type="hidden" name="typeElement" value="prestation" id="editWhat">
 			    <input type="hidden" name="typeAction" value="update">
                 <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
-                <div class="modal_footer">
-                    <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">
-                </div>
+            </div>
+
+            <div class="modal_footer">
+                <input type="submit" value="Modifier la prestation" class="submit_modal" name="submit">
             </div>
             `;
 
@@ -251,21 +254,57 @@ const remplirModale = (infosEdit,editWhat) => {
         modaleEdit.innerHTML = "";
 
         infosEdit.forEach((info) => {
-            const codeHTML= `
-            <h2>Modifier un client</h2>
-            <label for="nv_client_nom" name="nv_client_nom">Nom : </label><br><input type="text" name="nv_client_nom" id="nv_client_nom" value="${info.nom}"><br>
-            <label for="nv_client_prenom" name="nv_client_prenom">Prénom : </label><br><input type="text" name="nv_client_prenom" id="nv_client_prenom" value="${info.prenom}"><br>
-            <label for="nv_client_adresse" name="nv_client_adresse">Adresse : </label><br><input type="text" name="nv_client_adresse" id="nv_client_adresse"  value="${info.adresse}"><br>
-            <label for="nv_client_cp" name="nv_client_cp">Code postal : </label><br><input type="text" name="nv_client_cp" id="nv_client_cp"  value="${info.code_postal}"><br>
-            <label for="nv_client_ville" name="nv_client_ville">Ville : </label><br><input type="text" name="nv_client_ville" id="nv_client_ville" value="${info.ville}"><br>
-            <label for="nv_client_tel" name="nv_client_tel">Numéro de téléphone : </label><br><input type="text" name="nv_client_tel" id="nv_client_tel"  value="${info.telephone}"><br>
-            <label for="nv_client_mail" name="nv_client_mail">Adresse email : </label><br><input type="text" name="nv_client_mail" id="nv_client_mail" value="${info.mail}"><br>
-            
-            <input type="hidden" name="typeElement" value="client">
-            <input type="hidden" name="typeAction" value="update">
-            <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
-            
-            <input type="submit" value="Modifier le client" class="submit_modal">
+
+            const codeHTML = `
+            <div class="modal_grid">
+			<div class="modal_header">
+				<h2>Modifier un client</h2>
+
+				<div class="row">
+					<div class="column">
+						<label for="nv_client_nom" name="nv_client_nom"><h3>Nom : </h3></label>
+						<input type="text" name="nv_client_nom" id="nv_client_nom" value="${info.nom}">
+					</div>
+					
+					<div class="column">
+						<label for="nv_client_prenom" name="nv_client_prenom"><h3>Prénom : </h3></label>
+						<input type="text" name="nv_client_prenom" id="nv_client_prenom" value="${info.prenom}">
+					</div>
+				</div>
+			</div>
+
+			<div class="modal_body body_clients">
+			
+				<label for="nv_client_adresse" name="nv_client_adresse"><h4>Adresse : </h3></label>
+				<input type="text" name="nv_client_adresse" id="nv_client_adresse" class="champ_adresse" value="${info.adresse}">
+
+				<div class="row">
+					<div class="column">
+						<label for="nv_client_cp" name="nv_client_cp"><h4>Code postal : </h3></label>
+						<input type="text" name="nv_client_cp" id="nv_client_cp" value="${info.code_postal}">
+					</div>
+					<div class="column">
+						<label for="nv_client_ville" name="nv_client_ville"><h4>Ville : </h3></label>
+						<input type="text" name="nv_client_ville" id="nv_client_ville" value="${info.ville}">
+					</div>
+				</div>
+
+				<label for="nv_client_tel" name="nv_client_tel"><h4>Numéro de téléphone : </h3></label>
+				<input type="text" name="nv_client_tel" id="nv_client_tel" value="${info.telephone}">
+
+				<label for="nv_client_mail" name="nv_client_mail"><h4>Adresse email : </h3></label>
+				<input type="text" name="nv_client_mail" id="nv_client_mail" class="champ_mail" value="${info.mail}">
+				
+				<input type="hidden" name="typeElement" value="client">
+                <input type="hidden" name="typeAction" value="update">
+                <input type="hidden" name="idToEdit" value="${info.id}" id="idToEdit">
+
+			</div>
+
+			<div class="modal_footer">
+				<input type="submit" value="Modifier le client" class="submit_modal">
+			</div>
+		</div>
             `;
 
             modaleEdit.insertAdjacentHTML('beforeend', codeHTML);

@@ -619,53 +619,9 @@ input[type=radio] {
 	display: none;
 }
 
-#modal_creation_client {
-	position: fixed;
-	background-color: white;
-	z-index: 72;
-	left: 0;
-	right: 0;
-	top: 5%;
-	bottom: 0;
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-	height: 500px;
-	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-	border-radius: 15px;
-	text-align: center;
-}
-
-#modal_creation_client.hidden {
-	display: none;
-}
-
-#modal_creation_client input {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-#croix3 {
-	float: right;
-	opacity: 0.6;
-	margin-right: 5px;
-	margin-top: 5px;
-	cursor: pointer;
-}
-
-#croix3:hover {
-	opacity: 1;
-}
-
-#modal_creation_client h2 {
-	margin-top: 20px;
-	margin-left: 35px;
-}
-
 .submit_modal {
 	background-color: #BBDEFB;
 	border: 0;
-	padding: 10px;
 	border-radius: 10px;
 	color: rgba(0,0,0,0.87);
 	font-size: 1em;
@@ -722,6 +678,12 @@ input[type=radio] {
 	display: none;
 }
 
+.modal_grid {
+	display: grid;
+	grid-template-columns: 1fr;
+  	grid-template-rows: 225px 1fr 80px;
+}
+
 .modal_header {
 	background-color: #2196F3;
 	border-radius: 10px 10px 0px 0px;
@@ -731,8 +693,20 @@ input[type=radio] {
 	color: rgba(255,255,255,0.87);
 }
 
+.row {
+	display: flex;
+	flex-direction: column;
+}
+
 .modal_body {
 	padding: 20px;
+	padding-bottom: 0px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+
+.body_clients {
+	height: 30vh;
 }
 
 .modal_body input[type=text] {
@@ -746,8 +720,10 @@ input[type=radio] {
 .modal_footer {
 	display: flex;
 	justify-content: center;
-	margin-top: 10px;
-	margin-bottom: 10px;
+	padding-top: 10px;
+	padding-bottom: 20px;
+	height: 80px;
+	box-sizing: border-box;
 }
 
 .presta_prix {
@@ -767,6 +743,10 @@ input[type=radio] {
 	margin-bottom: 15px;
 }
 
+.fenetre_modale h4 {
+	margin: 0;
+}
+
 
 .modal_header input {
 	width: 100%;
@@ -777,6 +757,15 @@ input[type=radio] {
 	color: rgba(255,255,255,0.87);
 	font-size: 1.05em;
 	border: 0px;
+	margin-bottom: 5px;
+}
+
+.champ_adresse {
+	width: 100%;
+}
+
+.champ_mail {
+	width: 80%;
 }
 
 #modal_creation_presta.hidden {
@@ -800,37 +789,6 @@ textarea {
 	padding: 8px;
 	box-sizing: border-box;
 	font-family: 'Roboto';
-}
-
-#modal_edit_client {
-	position: fixed;
-	background-color: white;
-	z-index: 72;
-	left: 0;
-	right: 0;
-	top: 5%;
-	bottom: 0;
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-	height: 500px;
-	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-	border-radius: 15px;
-	text-align: center;
-}
-
-#modal_edit_client.hidden {
-	display: none;
-}
-
-#modal_edit_client input {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
-#modal_edit_client h2 {
-	margin-top: 20px;
-	margin-left: 35px;
 }
 
 #modal_confirm_suppr {
@@ -905,6 +863,23 @@ textarea {
 
 	.fenetre_modale {
 		width: 500px;
+	}
+
+	.body_clients {
+		height: 45vh;
+	}
+
+	.modal_grid {
+		grid-template-rows: 150px 1fr 70px;
+	}
+
+	.row {
+		flex-direction: row;
+		justify-content: space-between;
+	}
+
+	.column {
+		width: 45%;
 	}
 
 	ul#menu_nav {
