@@ -81,6 +81,35 @@ const verifierIconesEdit = () => {
 
                 ouvrirModale('modal_modif_client');
             }
+
+            if(icone.classList.contains('visites')) {
+                fetch("api_json.php?edit=visites&id="+idToEdit+"")
+                .then((response) => {
+                    return response.json();
+
+                })
+                .then((objetJSEdit) => {
+                    if(objetJSEdit.reponse) {
+                        remplirModale(objetJSEdit.reponse,"visites");
+
+                        let selectClients = document.getElementById("select_clients");
+                        let selectPrestas = document.getElementById("select_prestas");
+
+                        selectClients.insertAdjacentHTML('beforeend', objetJSEdit.listeOptions);
+                        selectPrestas.insertAdjacentHTML('beforeend', objetJSEdit.selectPrestas);
+
+                        listerFormPrestas();
+
+                        document.getElementById('valider_presta').addEventListener('click', (event) => {
+                            event.preventDefault();
+                            ajouterPresta();
+                        });
+
+                    }
+                })
+
+                ouvrirModale('modal_modif_visite');
+            }
         
         });
     });
@@ -243,7 +272,7 @@ const construireListeVisites = (tabVisites, listePrestas) => {
                     ${effectuee} ${payee}
                 </div>
                 <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
+                    <img src="./assets/images/edit.png" id="" class="icon_edit visites" data-id="${visite.id}">
                     <img src="./assets/images/delete.png" class="delete visite" data-id="${visite.id}">
                 </div>
             </div>
@@ -306,6 +335,7 @@ const remplirModale = (infosEdit,editWhat) => {
         modaleEdit.innerHTML = "";
 
         infosEdit.forEach((info) => {
+
             const codeHTML= `
             <div class="modal_header">
 			    <h2>Modifier une prestation</h2>
@@ -402,6 +432,84 @@ const remplirModale = (infosEdit,editWhat) => {
 
         });
             
+    }
+
+    if (editWhat == "visites") {
+        const modaleEdit = document.getElementById('ajax_edit_visite');
+
+        if(modaleEdit == null) {
+            return;
+        }
+
+        modaleEdit.innerHTML = "";
+
+        infosEdit.forEach((info) => {
+
+            let payee = "";
+            let effectuee = "";
+
+            if(info.effectuee == 1) {
+                effectuee = `<input type="checkbox" name="effectuee" checked>`;
+            }
+
+            else {
+                effectuee = `<input type="checkbox" name="effectuee">`;
+            }
+
+            if(info.payee == 1) {
+                payee = `<input type="checkbox" name="payee" checked>`;
+            }
+
+            else {
+                payee = `<input type="checkbox" name="payee">`;
+            }
+
+            const codeHTML = `
+            <div class="modal_header">
+			    <h2>Modifier la visite</h2>
+		    </div>
+		    <div class="modal_body">
+			    <div id="onglet_modifier">
+				    <h3>Statut de la visite</h3>
+				    <label><p>${effectuee} Cette visite est terminée</p></label>
+				    <label><p>${payee} Cette visite a été payée</p></label>
+
+				    <h3>Modifier les détails</h3>
+				    <label for="edit_visite_date" name="edit_visite_date">Date  </label><br>
+				    <input type="date" name="edit_visite_date" id="edit_visite_date" value="${info.date}"><br>
+				    <label for ="edit_visite_heure" name="edit_visite_heure">et heure :</label><br>
+				    <input type="time" name="edit_visite_heure" id="edit_visite_heure" value="${info.heure}"><br>
+		
+                    <select name="quel_client" id="select_clients">
+                        <option value="${info.clients_id}">${info.client_prenom} ${info.client_nom}</option>
+                        <?php
+                            require "php/model/liste_deroulante_clients.php";
+                        ?>
+                    </select>
+
+                    <input type="hidden" name="typeElement" value="visite">
+                    <input type="hidden" name="typeAction" value="update">
+                    <input type="hidden" name="idToEdit" value="${info.id}">
+
+			    </div>
+
+                <div id="onglet_prestas">
+                    <h3>Ajouter des prestations</h3>
+                    <select name="quelles_prestas" id="select_prestas">
+                    </select>
+                    <button id="valider_presta">Ajouter</button>
+
+                    <div id="liste_prestas_ajoutees">
+                    </div>
+			    </div>
+		    </div>
+            <div class="modal_footer">
+                <input type="submit" value="Ajouter la visite" class="submit_modal">
+            </div>
+            `;
+
+            modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
+        });
 
     }
 };

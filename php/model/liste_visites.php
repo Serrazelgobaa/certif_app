@@ -64,7 +64,7 @@
             <<<CODEHTML
             </div>
                 <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit">
+                    <img src="./assets/images/edit.png" id="" class="icon_edit visites" data-id="$id">
                     <img src="./assets/images/delete.png" class="delete visite" data-id="$id">
             </div>
             </div>

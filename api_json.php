@@ -50,9 +50,19 @@
 
         require "php/model/modal_edit.php";
 
-        $tabAssoJson = [
-            "reponse" => $reponse,
-        ];
+        if($edit == "visites") {
+            $tabAssoJson = [
+                "reponse" => $reponse,
+                "listeOptions" => $listeOptions,
+                "selectPrestas" => $selectPrestas,
+            ];
+        }
+
+        else {
+            $tabAssoJson = [
+                "reponse" => $reponse,
+            ];
+        }
     }
 
     /* AFFICHER LES PROFILS CLIENTS */

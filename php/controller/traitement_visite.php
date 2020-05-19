@@ -30,6 +30,48 @@
 
             /* MODIFICATION D'UNE VISITE EXISTANTE */
 
+            $idToEdit = $_POST["idToEdit"] ?? "";
+
+            if($idToEdit != "") {
+                $effectuee = $_POST['effectuee'] ?? "";
+                $payee = $_POST['payee'] ?? "";
+
+                if($effectuee != "") {
+                    $effectuee = 1;
+                }
+
+                else {
+                    $effectuee = 0;
+                }
+
+                if($payee != "") {
+                    $payee = 1;
+                }
+
+                else {
+                    $payee = 0;
+                }
+
+                $date = $_POST['edit_visite_date'] ?? "";
+                $heure = $_POST['edit_visite_heure'] ?? "";
+                $client_id = $_POST['quel_client'] ?? "";
+
+                modifierLigneVisite($idToEdit, [
+                    "payee" => $payee,
+                    "effectuee" => $effectuee,
+                    "date" => $date,
+                    "heure" => $heure,
+                    "clients_id" => $client_id,
+                ]);
+
+                $confirmation = "Visite modifiée !";
+
+                $tabLigne = lireTableVisites(false);
+
+                $listePrestas = [];
+
+            }
+
         }
 
         if($typeAction == "delete") {

@@ -768,6 +768,10 @@ input[type=radio] {
 	width: 80%;
 }
 
+.ajout_presta.hidden {
+	display: none;
+}
+
 #modal_creation_presta.hidden {
 	display: none;
 }

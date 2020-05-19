@@ -71,7 +71,9 @@
 		<select name="quel_client" id="quel_client">
 			<option value="">Sélectionner un client :</option>
 			<?php
-				require "php/model/liste_deroulante_clients.php";
+				require "php/model/listes_deroulantes.php";
+
+				echo $listeOptions;
 			?>
 		</select><br>
 
@@ -121,6 +123,14 @@
 
 <div id="modal_modif_presta" class="fenetre_modale hidden">
 	<form action="api_json.php" method="post" class="ajax" id="ajax_edit_presta">
+		
+	</form>
+</div>
+
+<!------------- MODIFIER UNE VISITE EXISTANTE -------------->
+
+<div id="modal_modif_visite" class="fenetre_modale hidden">
+	<form action="api_json.php" method="post" class="ajax" id="ajax_edit_visite">
 		
 	</form>
 </div>

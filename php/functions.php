@@ -53,8 +53,18 @@
         return $tabLigne;
     }
 
-    /*La fonction lireTable est trop basique pour permettre des nuances telles que des jointures, je crée donc des fonctions
-    spécifiques pour les cas particuliers*/
+    function lireLigneVisite($id) {
+        $requete = 
+        <<<CODESQL
+            SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id AND visites.id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete, []);
+
+        $tabLigne = $resultat->fetchAll(PDO::FETCH_ASSOC);
+
+        return $tabLigne;
+    }
     
     function lireTableVisites($limite) {
         if($limite == true) {
@@ -175,6 +185,15 @@
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete,$tabAssoClients);
+    }
+
+    function modifierLigneVisite($id, $tabAssoVisites) {
+        $requete =
+        <<<CODESQL
+            UPDATE visites SET payee = :payee, effectuee = :effectuee, date = :date, clients_id = :clients_id, heure = :heure WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete, $tabAssoVisites);
     }
 
 ?>
