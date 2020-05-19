@@ -85,9 +85,6 @@ else if (button.classList.contains('create_visite')){
 	document.getElementById('create_button2').addEventListener('click',(event) => {
 		ouvrirModale('modal_creation_visite');
 	});
-	document.getElementById('croix4').addEventListener('click', (event) => {
-		fermerModale('modal_creation_visite');
-	});
 }
 
 else if (button.classList.contains('create_presta')){

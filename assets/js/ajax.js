@@ -27,13 +27,22 @@ listeFormAjax.forEach((balise) => {
                 }
 
                 if(objetJS.typeElement == "client") {
-                    console.log(objetJS.tabLigne);
                     construireListeClients(objetJS.tabLigne);
+                }
+
+                if(objetJS.typeElement == "visite") {
+                    console.log(objetJS.listePrestas);
+                    construireListeVisites(objetJS.tabLigne,objetJS.listePrestas);
                 }
             }
         });
     });
 });
+
+/* FONCTIONS DE VERIFICATION */
+
+    /* Ces fonctions resélectionnent les cliquables provoquant des actions AJAX et remettent un listener dessus après
+    le renouvellement du contenu */
 
 const verifierIconesEdit = () => {
     let iconEdit = document.querySelectorAll('.icon_edit');
@@ -108,6 +117,11 @@ document.addEventListener('DOMContentLoaded', () =>{
     verifierTitresClients();
 });
 
+
+/* FONCTIONS DE CONSTRUCTION */
+
+    /* Ces fonctions reconstruisent la liste des éléments après la validation d'un formulaire */
+
 const construireCartePresta = (tabPresta) => {
     let baliseListePrestas = document.querySelector(".liste_prestas");
 
@@ -170,6 +184,83 @@ const construireListeClients = (tabClients) => {
     verifierIcones();
     verifierIconesEdit();
     verifierTitresClients();
+};
+
+const construireListeVisites = (tabVisites, listePrestas) => {
+    let baliseListeVisites = document.querySelector(".liste_visites");
+
+    if(baliseListeVisites == null) {
+        return;
+    }
+
+    baliseListeVisites.innerHTML = "";
+
+    tabVisites.forEach((visite) => {
+
+        let mois = "";
+        let minute = "";
+        let effectuee = "";
+        let payee= "";
+        let presta = listePrestas;
+        let id = visite.id;
+
+        if(visite.mois <= 9) {
+            mois = "0"+visite.mois;
+        }
+
+        else {
+            mois = visite.mois;
+        }
+
+        if(visite.minute <= 9) {
+            minute = "0"+visite.minute;
+        }
+
+        else{
+            minute = visite.minute;
+        }
+
+        if(visite.effectuee == 1) {
+            effectuee = `<img src="./assets/images/check.png" width="30px" height="30px"><p>Terminée</p>`;
+        }
+
+        else {
+            effectuee = `<img src="./assets/images/uncheck.png" width="30px" height="30px"><p>En cours</p>`;
+        }
+
+        if(visite.payee == 1) {
+            payee = `<img src="./assets/images/paid.png" width="30px" height="30px"><p>Payée</p>`;
+        }
+
+        else {
+            payee = `<img src="./assets/images/unpaid.png" width="30px" height="30px"><p>Non-payée</p>`;
+        }
+
+        const codeHTML = `
+        <div class=carte_visite>
+            <div class="card_header">
+                <div class="check_icons">
+                    ${effectuee} ${payee}
+                </div>
+                <div class="icon_card">
+                    <img src="./assets/images/edit.png" id="" class="icon_edit">
+                    <img src="./assets/images/delete.png" class="delete visite" data-id="${visite.id}">
+                </div>
+            </div>
+            <div class="carte_body card_body">
+                <h2>Chez ${visite.client_prenom} ${visite.client_nom}</h2>
+                <p>Le ${visite.jour}/${mois}/${visite.annee} à ${visite.heure} h ${minute}</p>
+                <p><span class="bold">Prestations : ${presta[id]}</span></p>
+                <h3>Prix total: ${visite.prix_total} €</h3>
+            </div>
+        </div>
+        `;
+
+        baliseListeVisites.insertAdjacentHTML('beforeend', codeHTML);
+    });
+
+    verifierIcones();
+    verifierIconesEdit();
 };
 
 const remplirProfil = (infosProfil) => {

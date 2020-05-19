@@ -7,12 +7,23 @@
 
         $client_nom = $visite["client_nom"];
         $client_prenom = $visite["client_prenom"];
-        $date = $visite["date"];
+        $jour = $visite["jour"];
+        $mois = $visite["mois"];
+        $annee = $visite["annee"];
         $heure = $visite["heure"];
+        $minute = $visite["minute"];
         $prix_total = $visite["prix_total"];
         $payee = $visite["payee"];
         $effectuee = $visite["effectuee"];
         $id = $visite["id"];
+
+        if($mois <= 9) {
+            $mois = "0".$mois;
+        }
+
+        if($minute <= 9) {
+            $minute = "0".$minute;
+        }
 
         echo
         <<<CODEHTML
@@ -54,12 +65,12 @@
             </div>
                 <div class="icon_card">
                     <img src="./assets/images/edit.png" id="" class="icon_edit">
-                    <a href="#"><img src="./assets/images/delete.png"></a>
+                    <img src="./assets/images/delete.png" class="delete visite" data-id="$id">
             </div>
             </div>
             <div class="carte_body card_body">
                 <h2>Chez $client_prenom $client_nom</h2>
-                <p>Le $date à $heure</p>
+                <p>Le $jour/$mois/$annee à $heure h $minute</p>
                 <p><span class="bold">Prestations : 
             CODEHTML;
 

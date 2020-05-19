@@ -7,12 +7,18 @@
 
         $client_nom = $visite["client_nom"];
         $client_prenom = $visite["client_prenom"];
-        $date = $visite["date"];
+        $jour = $visite["jour"];
+        $mois = $visite["mois"];
+        $annee = $visite["annee"];
         $heure = $visite["heure"];
         $prix_total = $visite["prix_total"];
         $payee = $visite["payee"];
         $effectuee = $visite["effectuee"];
         $id = $visite["id"];
+
+        if($mois <= 9) {
+            $mois = "0".$mois;
+        }
 
         echo
         <<<CODEHTML
@@ -29,7 +35,7 @@
                 </p>
             </div>
             <div class="carte_footer">
-                <p>$date</p>
+                <p>$jour/$mois/$annee</p>
             </div>
         </div>
         CODEHTML;

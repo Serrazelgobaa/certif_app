@@ -12,21 +12,35 @@
     if($typeElement != "") {
         if($typeElement == "prestation") {
             require "php/controller/traitement_prestation.php";
+
+            $tabAssoJson = [
+                "confirmation" => $confirmation ?? "",
+                "tabLigne" => $tabLigne ?? [],
+                "typeElement" => $typeElement,
+            ];
         }
 
         if($typeElement == "client") {
             require "php/controller/traitement_client.php";
+
+            $tabAssoJson = [
+                "confirmation" => $confirmation ?? "",
+                "tabLigne" => $tabLigne ?? [],
+                "typeElement" => $typeElement,
+            ];
         }
 
         if($typeElement == "visite") {
             require "php/controller/traitement_visite.php";
+
+            $tabAssoJson = [
+                "confirmation" => $confirmation ?? "",
+                "tabLigne" => $tabLigne ?? [],
+                "typeElement" => $typeElement,
+                "listePrestas" => $listePrestas,
+            ];
         }
 
-        $tabAssoJson = [
-            "confirmation" => $confirmation ?? "",
-            "tabLigne" => $tabLigne ?? [],
-            "typeElement" => $typeElement,
-        ];
     }
 
     /* REMPLIR LES FORMULAIRES DE MODALES DE MODIFICATION */

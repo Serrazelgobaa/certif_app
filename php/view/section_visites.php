@@ -52,6 +52,10 @@
 
    	<main id="visites_aside">
 
+	   <div class="liste_visites">
+
         <?php
             require "php/model/liste_visites.php";
         ?>
+
+		</div>

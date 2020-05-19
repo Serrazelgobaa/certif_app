@@ -61,26 +61,22 @@
 <!------------- AJOUTER UNE NOUVELLE VISITE ---------------->
 
 <div id="modal_creation_visite" class="fenetre_modale hidden">
-	<img src="./assets/images/croix.png" id="croix4" width="35px" height="35px">
-	<form action="./visites.php?create=true" method="post">
+	<form action="api_json.php" method="post" class="ajax">
 		<h2>Nouvelle visite</h2>
 		<label for="nv_visite_date" name="nv_visite_date">Date  </label><br>
-		<input type="datetime" name="nv_visite_date" id="nv_visite_date"><br>
+		<input type="date" name="nv_visite_date" id="nv_visite_date"><br>
 		<label for ="nv_visite_heure" name="nv_visite_heure">et heure :</label><br>
 		<input type="time" name="nv_visite_heure" id="nv_visite_heure"><br>
-		<label for="nv_visite_prix_total" name="nv_visite_prix_total">Prix Total :</label><br>
-		<input type="text" name="nv_visite_prix_total" id="nv_visite_prix_total"><br><br>
-
 		
-		<select name="quel_clients" id="quel_clients">
+		<select name="quel_client" id="quel_client">
 			<option value="">Sélectionner un client :</option>
-			<option value="">Mme Truc</option>
-            <option value="">Mme Truc</option>
-            <option value="">Mme Truc</option>
-            <option value="">Mme Truc</option>
+			<?php
+				require "php/model/liste_deroulante_clients.php";
+			?>
 		</select><br>
 
-		
+		<input type="hidden" name="typeElement" value="visite">
+		<input type="hidden" name="typeAction" value="create">
 		<input type="submit" value="Ajouter la visite" class="submit_modal">
 
 	</form>

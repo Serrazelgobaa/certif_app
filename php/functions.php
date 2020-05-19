@@ -25,7 +25,7 @@
         return $resultat;
     }
 
-    //Fonction pour traiter une requête SQL de lecture classique en plaçant les données de la table dans une array
+// FONCTIONS DE LECTURE
 
     function lireTable($nomTable) {
         $requete = 
@@ -60,14 +60,14 @@
         if($limite == true) {
             $requete =
             <<<CODESQL
-                SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id LIMIT 4
+                SELECT visites.*, DAY(date) as jour, MONTH(date) as mois, YEAR(date) as annee, HOUR(heure) as heure, MINUTE(heure) as minute, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id LIMIT 4
             CODESQL;
         }
 
         else {
             $requete =
             <<<CODESQL
-                SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id
+                SELECT visites.*, DAY(date) as jour, MONTH(date) as mois, YEAR(date) as annee, HOUR(heure) as heure, MINUTE(heure) as minute, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id ORDER BY id DESC
             CODESQL;
         }
 
@@ -94,7 +94,7 @@
     function lireImpayes() {
         $requete =
         <<<CODESQL
-        SELECT visites.*, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id WHERE payee=0 LIMIT 4
+        SELECT visites.*, DAY(date) as jour, MONTH(date) as mois, YEAR(date) as annee, HOUR(heure) as heure, MINUTE(heure) as minute, clients.nom AS client_nom, clients.prenom AS client_prenom FROM visites INNER JOIN clients ON visites.clients_id=clients.id WHERE payee=0 LIMIT 4
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete, []);
@@ -117,6 +117,8 @@
         return $tabLigne;
     }
 
+// FONCTIONS D'ECRITURE
+
     function insererLignePresta($tabAssoPrestas) {
         $requete =
         <<<CODESQL
@@ -135,6 +137,17 @@
         $resultat = envoyerRequeteSQL($requete,$tabAssoClients);
     }
 
+    function insererLigneVisite($tabAssoVisite) {
+        $requete =
+        <<<CODESQL
+            INSERT INTO visites (date,heure,clients_id,prix_total,payee,effectuee) VALUES (:date,:heure,:clients_id,:prix_total,:payee,:effectuee)
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoVisite);
+    }
+
+// FONCTIONS DE SUPPRESSION
+
     function supprimerLigne($table,$id) {
         $requete =
         <<<CODESQL
@@ -143,6 +156,8 @@
 
         $resultat = envoyerRequeteSQL($requete,[]);
     }
+
+// FONCTIONS DE MODIFICATION
 
     function modifierLignePresta($id, $tabAssoPrestas) {
         $requete =
