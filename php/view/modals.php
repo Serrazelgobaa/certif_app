@@ -62,24 +62,41 @@
 
 <div id="modal_creation_visite" class="fenetre_modale hidden">
 	<form action="api_json.php" method="post" class="ajax">
-		<h2>Nouvelle visite</h2>
-		<label for="nv_visite_date" name="nv_visite_date">Date  </label><br>
-		<input type="date" name="nv_visite_date" id="nv_visite_date"><br>
-		<label for ="nv_visite_heure" name="nv_visite_heure">et heure :</label><br>
-		<input type="time" name="nv_visite_heure" id="nv_visite_heure"><br>
-		
-		<select name="quel_client" id="quel_client">
-			<option value="">Sélectionner un client :</option>
-			<?php
-				require "php/model/listes_deroulantes.php";
+		<div class="modal_header">
+			<h2>Nouvelle visite</h2>
+		</div>
+		<div class="modal_body">
+			<h3>Client</h3>
+			<select name="quel_client" id="quel_client">
+				<option value="">Sélectionner un client :</option>
+				<?php
+					require "php/model/listes_deroulantes.php";
 
-				echo $listeOptions;
-			?>
-		</select><br>
+					echo $listeOptions;
+				?>
+			</select>
+			<div class="row row_visites">
+				<div class="column">
+					<label>
+						<h4>Date</h4> 
+						<input type="date" name="nv_visite_date" id="nv_visite_date">
+					</label>
+				</div>
+				<div class="column">
+					<label>
+						<h4>Heure</h4>
+						<input type="time" name="nv_visite_heure" id="nv_visite_heure">
+					</label>
+				</div>
+			</div>
 
-		<input type="hidden" name="typeElement" value="visite">
-		<input type="hidden" name="typeAction" value="create">
-		<input type="submit" value="Ajouter la visite" class="submit_modal">
+			<input type="hidden" name="typeElement" value="visite">
+			<input type="hidden" name="typeAction" value="create">
+
+		</div>
+		<div class="modal_footer">
+			<input type="submit" value="Ajouter la visite" class="submit_modal">
+		</div>
 
 	</form>
 </div>
@@ -94,10 +111,10 @@
 			<input type="text" name="nv_presta_nom" id="nv_presta_nom" class="champ">
 		</div>
 		<div class="modal_body">
-			<label for="nv_presta_desc" name="nv_presta_desc"><h3>Description : </h3></label>
+			<label for="nv_presta_desc" name="nv_presta_desc"><h4>Description : </h4></label>
 			<textarea name="nv_presta_desc" id="nv_presta_desc" class="champ"></textarea>
 
-			<label for="nv_presta_prix" name="nv_presta_prix"><h3>Tarif : </h3></label>
+			<label for="nv_presta_prix" name="nv_presta_prix"><h4>Tarif : </h4></label>
 			<input type="text" name="nv_presta_prix" id="nv_presta_prix" class="presta_prix champ"> €
 		
 			<input type="hidden" name="typeElement" value="prestation">

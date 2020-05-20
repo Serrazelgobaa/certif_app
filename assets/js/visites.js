@@ -21,8 +21,12 @@ const listerFormPrestas = (listePrestas) => {
 
 	optionsPresta.forEach((option) => {
 		let dataPrix = option.getAttribute("data-prix");
-		let texte = `<p class="ajout_presta hidden" data-id="${option.value}">${option.textContent} - ${dataPrix} €
-		<img src="assets/images/croix.png" class="retirer_presta" width="15px" height="15px" data-id="${option.value}" data-prix="${dataPrix}"></p>
+		let texte = `
+		<div class="ajout_presta hidden"  data-id="${option.value}">
+			<div class="ajt_presta_titre">${option.textContent}</div>
+			<div>${dataPrix}&nbsp;€</div>
+			<img src="assets/images/croix.png" class="retirer_presta" width="20px" height="20px" data-id="${option.value}" data-prix="${dataPrix}">
+		</div>
 		<input type="hidden" class="ajoutee" data-id="${option.value}" name="infoPresta[${option.value}]" value="false">`;
 		prestasAjoutees.insertAdjacentHTML('beforeend', texte);
 	});
@@ -81,12 +85,15 @@ const ajouterPresta = () => {
 			let prixInitial = parseInt(document.getElementById("champPrix").value,10);
 			let prix = parseInt(option.getAttribute('data-prix'), 10);
 
+			if(champCache.value == "false") {
+				let prixTotal = prixInitial + prix;
+
+				afficherPrixTotal(prixTotal);
+			}
+
 			prestaAAjouter.classList.remove('hidden');
 			champCache.value = "true";
 
-			let prixTotal = prixInitial + prix;
-
-			afficherPrixTotal(prixTotal);
 		}
 	});
 
@@ -111,6 +118,34 @@ const afficherPrixTotal = (prix) => {
 
 	textePrix.innerHTML = prix;
 	champPrix.value = prix;
+};
+
+const ouvrirOngletModifier = () => {
+	let ongletOuvert = document.getElementById('onglet_modifier');
+	let ongletFerme = document.getElementById('onglet_prestas');
+
+	let boutonOuvert = document.getElementById('onglet_modifier_bouton');
+	let boutonFerme = document.getElementById('onglet_prestas_bouton');
+
+	ongletOuvert.classList.remove('hidden');
+	ongletFerme.classList.add('hidden');
+
+	boutonOuvert.classList.add('actif');
+	boutonFerme.classList.remove('actif');
+};
+
+const ouvrirOngletPrestas = () => {
+	let ongletOuvert = document.getElementById('onglet_prestas');
+	let ongletFerme = document.getElementById('onglet_modifier');
+
+	let boutonOuvert = document.getElementById('onglet_prestas_bouton');
+	let boutonFerme = document.getElementById('onglet_modifier_bouton');
+
+	ongletOuvert.classList.remove('hidden');
+	ongletFerme.classList.add('hidden');
+
+	boutonOuvert.classList.add('actif');
+	boutonFerme.classList.remove('actif');
 };
 
 document.getElementById('btn_float').addEventListener('click', ouvrirFiltre);

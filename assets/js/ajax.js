@@ -355,10 +355,10 @@ const remplirModale = (infosEdit,editWhat) => {
 			    <input type="text" name="edit_presta_nom" id="edit_presta_nom" class="champ" value="${info.nom}">
 		    </div>
 		    <div class="modal_body">
-                <label for="edit_presta_desc" name="edit_presta_desc"><h3>Description : </h3></label>
+                <label for="edit_presta_desc" name="edit_presta_desc"><h4>Description : </h4></label>
                 <textarea name="edit_presta_desc" id="edit_presta_desc" class="champ">${info.description}</textarea>
 
-                <label for="edit_presta_prix" name="edit_presta_prix"><h3>Tarif : </h3></label>
+                <label for="edit_presta_prix" name="edit_presta_prix"><h4>Tarif : </h4></label>
                 <input type="text" name="edit_presta_prix" id="edit_presta_prix" class="presta_prix champ" value="${info.prix}"> €
             
                 <input type="hidden" name="typeElement" value="prestation" id="editWhat">
@@ -461,43 +461,72 @@ const remplirModale = (infosEdit,editWhat) => {
             let effectuee = "";
 
             if(info.effectuee == 1) {
-                effectuee = `<input type="checkbox" name="effectuee" checked>`;
+                effectuee = `<input type="checkbox" name="effectuee" id="check_box_done" checked><label for="check_box_done"></label>`;
             }
 
             else {
-                effectuee = `<input type="checkbox" name="effectuee">`;
+                effectuee = `<input type="checkbox" id="check_box_done" name="effectuee"><label for="check_box_done"></label>`;
             }
 
             if(info.payee == 1) {
-                payee = `<input type="checkbox" name="payee" checked>`;
+                payee = `<input type="checkbox" name="payee" id="check_box_paid" checked><label for="check_box_paid"></label>`;
             }
 
             else {
-                payee = `<input type="checkbox" name="payee">`;
+                payee = `<input type="checkbox" name="payee" id="check_box_paid"><label for="check_box_paid"></label>`;
             }
 
             const codeHTML = `
-            <div class="modal_header">
-			    <h2>Modifier la visite</h2>
+            <div class="modal_header" id="header_visites">
+                <h2>Modifier une visite</h2>
+                <div class="onglets">
+                    <div class="onglet actif" id="onglet_modifier_bouton">
+                        <p>Modifier</p>
+                    </div>
+                    <div class="onglet" id="onglet_prestas_bouton">
+                        <p>Prestations</p>
+                    </div>
+                </div>
 		    </div>
-		    <div class="modal_body">
+		    <div class="modal_body body_visites">
 			    <div id="onglet_modifier">
-				    <h3>Statut de la visite</h3>
-				    <label><p>${effectuee} Cette visite est terminée</p></label>
-				    <label><p>${payee} Cette visite a été payée</p></label>
+                    <h3>Statut de la visite</h3>
+                        <label>
+                        <div class="ligne_check">
+                            <div class="checkbox">${effectuee}</div>
+                            <p class="after_checkbox">Cette visite est terminée</p>
+                        </div>
+                        </label>
+                    
+                        <label>
+                        <div class="ligne_check">
+                            <div class="checkbox">${payee}</div>
+                            <p class="after_checkbox">Cette visite a été payée</p>
+                        </div>
+                        </label>
 
-				    <h3>Modifier les détails</h3>
-				    <label for="edit_visite_date" name="edit_visite_date">Date  </label><br>
-				    <input type="date" name="edit_visite_date" id="edit_visite_date" value="${info.date}"><br>
-				    <label for ="edit_visite_heure" name="edit_visite_heure">et heure :</label><br>
-				    <input type="time" name="edit_visite_heure" id="edit_visite_heure" value="${info.heure}"><br>
-		
+                    <h3>Modifier les détails</h3>
+                    <h4>Client</h4>
                     <select name="quel_client" id="select_clients">
                         <option value="${info.clients_id}">${info.client_prenom} ${info.client_nom}</option>
                         <?php
                             require "php/model/liste_deroulante_clients.php";
                         ?>
                     </select>
+                    <div class="row row_visites">
+                        <div class="column">
+                            <label>
+                                <h4>Date</h4>
+                                <input type="date" name="edit_visite_date" id="edit_visite_date" value="${info.date}">
+                            </label>
+                        </div>
+                        <div class="column">
+                            <label>
+                                <h4>Heure</h4>
+                                <input type="time" name="edit_visite_heure" id="edit_visite_heure" value="${info.heure}">
+                            </label>
+                        </div>
+                    </div>
 
                     <input type="hidden" name="typeElement" value="visite">
                     <input type="hidden" name="typeAction" value="update">
@@ -505,7 +534,7 @@ const remplirModale = (infosEdit,editWhat) => {
 
 			    </div>
 
-                <div id="onglet_prestas">
+                <div id="onglet_prestas" class="hidden">
                     <h3>Ajouter des prestations</h3>
                     <select name="quelles_prestas" id="select_prestas">
                     </select>
@@ -525,6 +554,9 @@ const remplirModale = (infosEdit,editWhat) => {
             `;
 
             modaleEdit.insertAdjacentHTML('beforeend', codeHTML);
+
+            document.getElementById('onglet_modifier_bouton').addEventListener('click', ouvrirOngletModifier);
+            document.getElementById('onglet_prestas_bouton').addEventListener('click', ouvrirOngletPrestas);
         });
 
     }

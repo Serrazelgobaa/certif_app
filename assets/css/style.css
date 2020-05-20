@@ -629,37 +629,6 @@ input[type=radio] {
 	height: 50px;
 }
 
-#modal_creation_visite {
-	position: fixed;
-	background-color: white;
-	z-index: 72;
-	left: 0;
-	right: 0;
-	top: 5%;
-	bottom: 0;
-	margin-left: auto;
-	margin-right: auto;
-	width: 300px;
-	height: 500px;
-	box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
-	border-radius: 15px;
-	text-align: center;
-}
-
-#modal_creation_visite h2 {
-	margin-top: 20px;
-	margin-left: 35px;
-}
-
-#modal_creation_visite.hidden {
-	display: none;
-}
-
-#modal_creation_visite input {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
 .fenetre_modale {
 	position: fixed;
 	background-color: white;
@@ -678,10 +647,104 @@ input[type=radio] {
 	display: none;
 }
 
+/* //////////// CHECKBOX ///////////// */
+
+.fenetre_modale [type="checkbox"]:not(:checked),
+.fenetre_modale [type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+
+.fenetre_modale [type="checkbox"]:not(:checked) + label,
+.fenetre_modale [type="checkbox"]:checked + label {
+  position: relative; 
+  padding-left: 25px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.fenetre_modale [type="checkbox"]:not(:checked) + label:before,
+.fenetre_modale [type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left:0; top: 2px;
+  width: 30px; height: 30px; 
+  border: 1px solid #eee;
+  background: #f8f8f8;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+
+.fenetre_modale [type="checkbox"]:not(:checked) + label:after,
+.fenetre_modale [type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: 0; left: 6px;
+  font-size: 24px;
+  color: black;
+  transition: all .2s;
+}
+
+.ligne_check {
+	display: flex;
+	align-items: flex-start;
+	margin-bottom: 5px;
+	margin-top: 5px;
+}
+
+.ligne_check:last-of-type {
+	margin-bottom: 25px;
+}
+
+.after_checkbox {
+	padding-top: 10px;
+	margin: 0px;
+	margin-left: 20px;
+}
+
+.fenetre_modale [type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0); 
+}
+
+.fenetre_modale [type="checkbox"]:checked + label:after {
+  opacity: 1; 
+  transform: scale(1);
+}
+
+/* //////////// CHECKBOX ///////////// */
+
 .modal_grid {
 	display: grid;
 	grid-template-columns: 1fr;
   	grid-template-rows: 225px 1fr 80px;
+}
+
+#valider_presta {
+	margin-left: 15px;
+	height: 37px;
+	border: 0px;
+	box-shadow: 2px 2px 3px rgba(0,0,0,0.20);
+	font-size: 1em;
+}
+
+.ajout_presta {
+	background-color: #eee;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding: 5px;
+	width: 70%;
+}
+
+.ajt_presta_titre {
+	width: 250px;
+}
+
+#total {
+	font-weight: bold;
 }
 
 .modal_header {
@@ -693,9 +756,47 @@ input[type=radio] {
 	color: rgba(255,255,255,0.87);
 }
 
+#header_visites {
+	padding-bottom: 0px;
+}
+
+.onglets {
+	display: flex;
+	justify-content: space-around;
+}
+
+.onglet {
+	background-color: #BBDEFB;
+	border-radius: 10px 10px 0px 0px;
+	text-align: center;
+	color: rgba(0,0,0,0.87);
+	width: 70%;
+	margin-left: 5px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+.onglet.actif {
+	background-color: white;
+	font-weight: bold;
+}
+
+#onglet_modifier.hidden, #onglet_prestas.hidden {
+	display: none;
+}
+
+.flex-center {
+	display: flex;
+	justify-content: center;
+}
+
 .row {
 	display: flex;
 	flex-direction: column;
+}
+
+.row.row_visites {
+	margin-bottom: 20px;
 }
 
 .modal_body {
@@ -709,12 +810,37 @@ input[type=radio] {
 	height: 30vh;
 }
 
+.body_visites {
+	max-height: 50vh;
+}
+
 .modal_body input[type=text] {
 	margin-bottom: 20px;
 	height: 37px;
 	box-sizing: border-box;
 	padding-left: 8px;
 	font-size: 1em;
+}
+
+.modal_body input[type=date], input[type=time] {
+	height: 37px;
+	font-family: 'Roboto';
+	font-size: 1em;
+	box-sizing: border-box;
+	padding-left: 8px;
+	width: 65%;
+}
+
+.modal_body input[type=time] {
+	text-align: center;
+}
+
+.modal_body select {
+	height: 37px;
+	width: 60%;
+	font-size: 1em;
+	font-size: 1.05em;
+	margin-bottom: 30px;
 }
 
 .modal_footer {
@@ -745,6 +871,7 @@ input[type=radio] {
 
 .fenetre_modale h4 {
 	margin: 0;
+	margin-bottom: 3px;
 }
 
 
@@ -770,19 +897,6 @@ input[type=radio] {
 
 .ajout_presta.hidden {
 	display: none;
-}
-
-#modal_creation_presta.hidden {
-	display: none;
-}
-
-#modal_modif_presta.hidden {
-	display: none;
-}
-
-#modal_modif_presta input {
-	margin-top: 10px;
-	margin-bottom: 10px;
 }
 
 textarea {
@@ -867,6 +981,12 @@ textarea {
 
 	.fenetre_modale {
 		width: 500px;
+	}
+
+	.onglet {
+		width: 45%;
+		margin-left: 10px;
+		margin-right: 10px;
 	}
 
 	.body_clients {
