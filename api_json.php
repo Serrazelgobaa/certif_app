@@ -16,7 +16,7 @@
             $tabAssoJson = [
                 "confirmation" => $confirmation ?? "",
                 "tabLigne" => $tabLigne ?? [],
-                "typeElement" => $typeElement,
+                "typeElement" => $typeElement ?? "",
             ];
         }
 
@@ -26,7 +26,7 @@
             $tabAssoJson = [
                 "confirmation" => $confirmation ?? "",
                 "tabLigne" => $tabLigne ?? [],
-                "typeElement" => $typeElement,
+                "typeElement" => $typeElement ?? "",
             ];
         }
 
@@ -36,8 +36,8 @@
             $tabAssoJson = [
                 "confirmation" => $confirmation ?? "",
                 "tabLigne" => $tabLigne ?? [],
-                "typeElement" => $typeElement,
-                "listePrestas" => $listePrestas,
+                "typeElement" => $typeElement ?? "",
+                "listePrestas" => $listePrestas ?? [],
             ];
         }
 
@@ -52,15 +52,16 @@
 
         if($edit == "visites") {
             $tabAssoJson = [
-                "reponse" => $reponse,
-                "listeOptions" => $listeOptions,
-                "selectPrestas" => $selectPrestas,
+                "reponse" => $reponse ?? "",
+                "listeOptions" => $listeOptions ?? "",
+                "selectPrestas" => $selectPrestas ?? "",
+                "listePrestas" => $listePrestas ?? [],
             ];
         }
 
         else {
             $tabAssoJson = [
-                "reponse" => $reponse,
+                "reponse" => $reponse ?? "",
             ];
         }
     }
@@ -73,7 +74,7 @@
         require "php/model/profil_client.php";
 
         $tabAssoJson = [
-            "reponse" => $reponse,
+            "reponse" => $reponse ?? "",
         ];
     }
 

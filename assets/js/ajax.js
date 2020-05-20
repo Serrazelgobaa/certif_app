@@ -31,8 +31,8 @@ listeFormAjax.forEach((balise) => {
                 }
 
                 if(objetJS.typeElement == "visite") {
-                    console.log(objetJS.listePrestas);
                     construireListeVisites(objetJS.tabLigne,objetJS.listePrestas);
+                    console.log(objetJS.infoPrestas);
                 }
             }
         });
@@ -98,7 +98,7 @@ const verifierIconesEdit = () => {
                         selectClients.insertAdjacentHTML('beforeend', objetJSEdit.listeOptions);
                         selectPrestas.insertAdjacentHTML('beforeend', objetJSEdit.selectPrestas);
 
-                        listerFormPrestas();
+                        listerFormPrestas(objetJSEdit.listePrestas);
 
                         document.getElementById('valider_presta').addEventListener('click', (event) => {
                             event.preventDefault();
@@ -230,8 +230,9 @@ const construireListeVisites = (tabVisites, listePrestas) => {
         let minute = "";
         let effectuee = "";
         let payee= "";
-        let presta = listePrestas;
         let id = visite.id;
+        let prestas = listePrestas[id];
+        let codeHTMLMilieu = "";
 
         if(visite.mois <= 9) {
             mois = "0"+visite.mois;
@@ -265,25 +266,36 @@ const construireListeVisites = (tabVisites, listePrestas) => {
             payee = `<img src="./assets/images/unpaid.png" width="30px" height="30px"><p>Non-payée</p>`;
         }
 
-        const codeHTML = `
+        let codeHTML = `
         <div class=carte_visite>
             <div class="card_header">
                 <div class="check_icons">
                     ${effectuee} ${payee}
                 </div>
                 <div class="icon_card">
-                    <img src="./assets/images/edit.png" id="" class="icon_edit visites" data-id="${visite.id}">
-                    <img src="./assets/images/delete.png" class="delete visite" data-id="${visite.id}">
+                    <img src="./assets/images/edit.png" id="" class="icon_edit visites" data-id="${id}">
+                    <img src="./assets/images/delete.png" class="delete visite" data-id="${id}">
                 </div>
             </div>
             <div class="carte_body card_body">
                 <h2>Chez ${visite.client_prenom} ${visite.client_nom}</h2>
                 <p>Le ${visite.jour}/${mois}/${visite.annee} à ${visite.heure} h ${minute}</p>
-                <p><span class="bold">Prestations : ${presta[id]}</span></p>
+                <p><span class="bold">Prestations : `;
+
+            prestas.forEach((presta) => {
+                codeHTMLMilieu+= ' '+presta+' |';
+            });
+
+
+        let codeHTMLFin = `
+                </span></p>
                 <h3>Prix total: ${visite.prix_total} €</h3>
+                </div>
             </div>
-        </div>
         `;
+
+        codeHTML+= codeHTMLMilieu;
+        codeHTML += codeHTMLFin;
 
         baliseListeVisites.insertAdjacentHTML('beforeend', codeHTML);
     });
@@ -501,10 +513,14 @@ const remplirModale = (infosEdit,editWhat) => {
 
                     <div id="liste_prestas_ajoutees">
                     </div>
+                    <div id="total">
+                        <p>Prix total : <span id="prix_total">0</span> €</p>
+                        <input type="hidden" name="prix_total" value="0" id="champPrix">
+                    </div>
 			    </div>
 		    </div>
             <div class="modal_footer">
-                <input type="submit" value="Ajouter la visite" class="submit_modal">
+                <input type="submit" value="Modifier la visite" class="submit_modal">
             </div>
             `;
 

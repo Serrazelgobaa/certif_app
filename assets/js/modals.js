@@ -43,8 +43,6 @@ const verifierIcones = () => {
 	let iconesSuppr = document.querySelectorAll('.delete');
 	let iconesEdit = document.querySelectorAll('.icon_edit');
 
-	console.log("vérification faite !");
-
 /* REACTION AU CLIC SUR CHAQUE ICONE DE SUPPRESSION */
 
 	iconesSuppr.forEach((icone) => {

@@ -35,6 +35,8 @@
             if($idToEdit != "") {
                 $effectuee = $_POST['effectuee'] ?? "";
                 $payee = $_POST['payee'] ?? "";
+                $infoPrestas = $_POST['infoPresta'] ?? [];
+                $prix_total = $_POST['prix_total'] ?? "0";
 
                 if($effectuee != "") {
                     $effectuee = 1;
@@ -62,7 +64,19 @@
                     "date" => $date,
                     "heure" => $heure,
                     "clients_id" => $client_id,
+                    "prix_total" => $prix_total,
                 ]);
+
+                supprimerLigneLiaison($idToEdit);
+
+                foreach($infoPrestas as $key => $info) {
+                    if($info == "true") {
+                        insererLigneLiaison([
+                            "prestations_id" => $key,
+                            "visites_id" => $idToEdit,
+                        ]);
+                    }
+                }
 
                 $confirmation = "Visite modifiée !";
 
@@ -94,15 +108,16 @@
 
         foreach($tabLigne as $visite) {
             $id = $visite['id'];
-            $stringPresta = "";
+            $tableauPresta = [];
             $tabPrestas = lirePrestasDansVisites($id);
 
             foreach($tabPrestas as $presta) {
                 $prestaNom = $presta["nom_presta"];
-                $stringPresta .= " ".$prestaNom." |";
+                $prestaPrix = $presta["prix_presta"];
+                $tableauPresta[] = $prestaNom;
             }
 
-            $listePrestas+= [$id => $stringPresta];
+            $listePrestas+= [$id => $tableauPresta];
         }
     }
 ?>

@@ -91,7 +91,7 @@
     function lirePrestasDansVisites($visite_id) {
         $requete = 
         <<<CODESQL
-            SELECT visites_prestations.*, prestations.nom AS nom_presta FROM visites_prestations INNER JOIN prestations ON visites_prestations.prestations_id=prestations.id WHERE visites_id=$visite_id
+            SELECT visites_prestations.*, prestations.nom AS nom_presta, prestations.id AS id_presta, prestations.prix AS prix_presta FROM visites_prestations INNER JOIN prestations ON visites_prestations.prestations_id=prestations.id WHERE visites_id=$visite_id
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete, []);
@@ -156,12 +156,30 @@
         $resultat = envoyerRequeteSQL($requete,$tabAssoVisite);
     }
 
+    function insererLigneLiaison($tabAssoLiaison) {
+        $requete =
+        <<<CODESQL
+            INSERT INTO visites_prestations (prestations_id,visites_id) VALUES (:prestations_id,:visites_id)
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,$tabAssoLiaison);
+    }
+
 // FONCTIONS DE SUPPRESSION
 
     function supprimerLigne($table,$id) {
         $requete =
         <<<CODESQL
             DELETE FROM $table WHERE id=$id
+        CODESQL;
+
+        $resultat = envoyerRequeteSQL($requete,[]);
+    }
+
+    function supprimerLigneLiaison($id) {
+        $requete = 
+        <<<CODESQL
+            DELETE FROM visites_prestations WHERE visites_id=$id
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete,[]);
@@ -190,7 +208,7 @@
     function modifierLigneVisite($id, $tabAssoVisites) {
         $requete =
         <<<CODESQL
-            UPDATE visites SET payee = :payee, effectuee = :effectuee, date = :date, clients_id = :clients_id, heure = :heure WHERE id=$id
+            UPDATE visites SET payee = :payee, effectuee = :effectuee, date = :date, clients_id = :clients_id, heure = :heure, prix_total = :prix_total WHERE id=$id
         CODESQL;
 
         $resultat = envoyerRequeteSQL($requete, $tabAssoVisites);
